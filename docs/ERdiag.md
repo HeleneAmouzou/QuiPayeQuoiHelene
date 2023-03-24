@@ -23,7 +23,7 @@ GROUP {
 
 EXPENSE {
     String name
-    String type
+    Date date
     String description 
     int amount 
 }
