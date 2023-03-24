@@ -11,7 +11,7 @@ USER {
     String name 
     String surname
     String mail 
-    int phoneNumber 
+    String phoneNumber 
     List groups
 }
     
