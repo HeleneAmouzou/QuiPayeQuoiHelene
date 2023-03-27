@@ -3,7 +3,7 @@
 erDiagram
     USER }|--o{ GROUP : composes
     GROUP ||--o{ EXPENSE : contains
-    USER ||--o{ EXPENSE : makes
+    USER ||--o{ EXPENSE : pays
     USER }|--|{ EXPENSE : "is concerned by"
 
 USER {
@@ -11,19 +11,16 @@ USER {
     String name 
     String surname
     String mail 
-    String phoneNumber 
-    List groups
+    String phoneNumber
 }
     
 GROUP {
     String name
-    List users 
-    List expenses
 }
 
 EXPENSE {
     String name
-    Date date
+    DateTime date
     String description 
     int amount 
 }
