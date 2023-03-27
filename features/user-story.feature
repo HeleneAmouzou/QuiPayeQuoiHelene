@@ -1,8 +1,8 @@
 Feature : View balance
 
-  Given I am a user of the application
-  When I am on the "View balance" page
-  I want to see a summary of the credits and debits of the group members
+  In order to know who owes who
+  As a user
+  I need to access the summary of the credits and debits of the group members
 
   Scenario: The balance of my group is displayed
     Given I am a member of the group
