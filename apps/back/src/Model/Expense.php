@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Model;
+
 class Expense {
     private string $name;
     private \DateTime $date;
@@ -8,7 +10,7 @@ class Expense {
     private array $participants;
     private User $payer;
 
-    public function __construct(string $name, DateTime $date, string $description, int $amount, array $participants, User $payer)
+    public function __construct(string $name, \DateTime $date, string $description, int $amount, array $participants, User $payer)
     {
         $this->name = $name;
         $this->date = $date;
@@ -18,51 +20,63 @@ class Expense {
         $this->payer = $payer;
     }
 
-    public function setName(string $name){
+    public function setName(string $name): void
+    {
         $this->name;
     }
 
-    public function getName(): string{
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    public function setDate(DateTime $date){
+    public function setDate(\DateTime $date): void
+    {
         $this->date;
     }
 
-    public function getDate(): \DateTime{
+    public function getDate(): \DateTime
+    {
         return $this->date;
     }
 
-    public function setDescription(string $description){
+    public function setDescription(string $description): void
+    {
         $this->description;
     }
 
-    public function getDescription(): string{
+    public function getDescription(): string
+    {
         return $this->description;
     }
 
-    public function setAmount(int $amount){
+    public function setAmount(int $amount): void
+    {
         $this->amount;
     }
 
-    public function getAmount(): int{
+    public function getAmount(): int
+    {
         return $this->amount;
     }
 
-    public function setParticipants(array $participants){
+    public function setParticipants(array $participants): void
+    {
         $this->participants;
     }
 
-    public function getParticipants(): array{
+    public function getParticipants(): array
+    {
         return $this->participants;
     }
 
-    public function setPayer(User $payer){
+    public function setPayer(User $payer): void
+    {
         $this->payer;
     }
 
-    public function getPayer(): User{
+    public function getPayer(): User
+    {
         return $this->payer;
     }
 }

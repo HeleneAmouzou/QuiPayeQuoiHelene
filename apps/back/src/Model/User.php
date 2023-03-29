@@ -1,9 +1,12 @@
 <?php
 
+namespace App\Model;
+
 class User {
     private string $name;
     private string $surname;
     private string $mail;
+    private $expenses = [];
 
     public function __construct(string $name, string $surname, string $mail)
     {
@@ -12,32 +15,38 @@ class User {
         $this->mail = $mail;
     }
 
-    public function setName(string $name){
+    public function setName(string $name): void
+    {
         $this->name;
     }
 
-    public function getName(): string{
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    public function setSurname(string $surname){
+    public function setSurname(string $surname): void
+    {
         $this->surname;
     }
 
-    public function getSurname(): string{
+    public function getSurname(): string
+    {
         return $this->surname;
     }
 
-    public function setMail(string $mail){
+    public function setMail(string $mail): void
+    {
         $this->mail;
     }
 
-    public function getMail(): string{
+    public function getMail(): string
+    {
         return $this->mail;
     }
-
-    private $expenses = [];
-    public function addExpense(Expense $expense) {
+ 
+    public function addExpense(Expense $expense): void
+    {
         $this->expenses[] = $expense;
     }
 }
