@@ -3,21 +3,17 @@
 namespace App\Model;
 
 class User {
-    private string $name;
-    private string $surname;
-    private string $mail;
     private $expenses = [];
-
-    public function __construct(string $name, string $surname, string $mail)
-    {
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->mail = $mail;
+    public function __construct(
+        private string $name,
+        private string $surname,
+        private string $mail
+    ) {
     }
 
     public function setName(string $name): void
     {
-        $this->name;
+        $this->name = $name;
     }
 
     public function getName(): string
@@ -27,7 +23,7 @@ class User {
 
     public function setSurname(string $surname): void
     {
-        $this->surname;
+        $this->surname = $surname;
     }
 
     public function getSurname(): string
@@ -37,7 +33,7 @@ class User {
 
     public function setMail(string $mail): void
     {
-        $this->mail;
+        $this->mail = $mail;
     }
 
     public function getMail(): string

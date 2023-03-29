@@ -70,7 +70,7 @@ class ViewBalanceCommand extends Command
             $sumExpensesIncludingUser = array_sum($expensesIncludingUser);
 
             $balancePerUser = $sumExpensesPaidByUser - $sumExpensesIncludingUser;
-            $output->writeln("{$user->getName()}"." "."{$balancePerUser}");
+            $output->writeln("{$user->getName()} {$balancePerUser}");
         }
         
         return Command::SUCCESS;

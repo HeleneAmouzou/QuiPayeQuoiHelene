@@ -3,26 +3,19 @@
 namespace App\Model;
 
 class Expense {
-    private string $name;
-    private \DateTime $date;
-    private string $description;
-    private int $amount;
-    private array $participants;
-    private User $payer;
-
-    public function __construct(string $name, \DateTime $date, string $description, int $amount, array $participants, User $payer)
-    {
-        $this->name = $name;
-        $this->date = $date;
-        $this->description = $description;
-        $this->amount = $amount;
-        $this->participants = $participants;
-        $this->payer = $payer;
+    public function __construct(
+        private string $name,
+        private \DateTime $date,
+        private string $description,
+        private int $amount,
+        private array $participants,
+        private User $payer
+    ) {
     }
 
     public function setName(string $name): void
     {
-        $this->name;
+        $this->name = $name;
     }
 
     public function getName(): string
@@ -32,7 +25,7 @@ class Expense {
 
     public function setDate(\DateTime $date): void
     {
-        $this->date;
+        $this->date = $date;
     }
 
     public function getDate(): \DateTime
@@ -42,7 +35,7 @@ class Expense {
 
     public function setDescription(string $description): void
     {
-        $this->description;
+        $this->description = $description;
     }
 
     public function getDescription(): string
@@ -52,7 +45,7 @@ class Expense {
 
     public function setAmount(int $amount): void
     {
-        $this->amount;
+        $this->amount = $amount;
     }
 
     public function getAmount(): int
@@ -62,7 +55,7 @@ class Expense {
 
     public function setParticipants(array $participants): void
     {
-        $this->participants;
+        $this->participants = $participants;
     }
 
     public function getParticipants(): array
@@ -72,7 +65,7 @@ class Expense {
 
     public function setPayer(User $payer): void
     {
-        $this->payer;
+        $this->payer = $payer;
     }
 
     public function getPayer(): User
