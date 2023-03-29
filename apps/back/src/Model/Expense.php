@@ -11,6 +11,7 @@ class Expense {
         private array $participants,
         private User $payer
     ) {
+        $payer->addExpense($this);
     }
 
     public function setName(string $name): void

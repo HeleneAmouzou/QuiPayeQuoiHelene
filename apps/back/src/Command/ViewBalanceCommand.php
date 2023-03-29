@@ -33,12 +33,6 @@ class ViewBalanceCommand extends Command
         $expense4 = new Expense('Materiel', new DateTime('25 march 2023'), 'nouveau materiel', 60, [$andre, $caroline, $benoit], $benoit);
         $expenses = [$expense1,$expense2,$expense3,$expense4];
 
-        //Adding expenses to users
-        $andre->addExpense($expense1);
-        $andre->addExpense($expense2);
-        $caroline->addExpense($expense3);
-        $benoit->addExpense($expense4);
-
         //Balance
         foreach($users as $user)
         {
