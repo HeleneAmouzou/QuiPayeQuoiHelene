@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Model\Expense as ModelExpense;
-use App\Model\User as ModelUser;
+use App\Model\Expense;
+use App\Model\User;
 use DateTime;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -21,24 +21,17 @@ class ViewBalanceCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         //Users creation
-        $andre = new ModelUser('Andre','Toto','andre@gmail.com');
-        $caroline = new ModelUser('Caroline', 'Titi','caro@gmail.com');
-        $benoit = new ModelUser('Benoit', 'Tutu', 'benoit@gmail.com');
-        $users = []; 
-        $users [] = $andre;
-        $users [] = $caroline;
-        $users [] = $benoit;
+        $andre = new User('Andre','Toto','andre@gmail.com');
+        $caroline = new User('Caroline', 'Titi','caro@gmail.com');
+        $benoit = new User('Benoit', 'Tutu', 'benoit@gmail.com');
+        $users = [$andre,$caroline,$benoit];
         
         //Expenses creation
-        $expense1 = new ModelExpense('essence', new DateTime('20 march 2023'), 'plein d\'essence pour aller au match', 30, [$andre, $caroline, $benoit], $andre);
-        $expense2 = new ModelExpense('souvenir', new DateTime('21 march 2023'), 'souvenir de notre tournoi à Caen', 20, [$andre, $benoit], $andre);
-        $expense3 = new ModelExpense('bar', new DateTime('24 march 2023'), 'tournee', 15, [$caroline, $benoit], $caroline);
-        $expense4 = new ModelExpense('Materiel', new DateTime('25 march 2023'), 'nouveau materiel', 60, [$andre, $caroline, $benoit], $benoit);
-        $expenses = [];
-        $expenses [] = $expense1;
-        $expenses [] = $expense2;
-        $expenses [] = $expense3;
-        $expenses [] = $expense4;
+        $expense1 = new Expense('essence', new DateTime('20 march 2023'), 'plein d\'essence pour aller au match', 30, [$andre, $caroline, $benoit], $andre);
+        $expense2 = new Expense('souvenir', new DateTime('21 march 2023'), 'souvenir de notre tournoi à Caen', 20, [$andre, $benoit], $andre);
+        $expense3 = new Expense('bar', new DateTime('24 march 2023'), 'tournee', 15, [$caroline, $benoit], $caroline);
+        $expense4 = new Expense('Materiel', new DateTime('25 march 2023'), 'nouveau materiel', 60, [$andre, $caroline, $benoit], $benoit);
+        $expenses = [$expense1,$expense2,$expense3,$expense4];
 
         //Adding expenses to users
         $andre->addExpense($expense1);
@@ -50,26 +43,23 @@ class ViewBalanceCommand extends Command
         foreach($users as $user)
         {
             $expensesPaidByUser = [];
+            $expensesIncludingUser = [];
             foreach($expenses as $expense)
             {
                 if($expense->getPayer() == $user)
                 {
                     $expensesPaidByUser [] = $expense->getAmount();
                 }
-            } 
-            $sumExpensesPaidByUser = array_sum($expensesPaidByUser);
-
-            $expensesIncludingUser = [];
-            foreach($expenses as $expense)
-            {
+                
                 if(in_array($user, ($expense->getParticipants())))
                 {
                     $expensesIncludingUser [] = $expense->getAmount()/(count($expense->getParticipants()));
                 }
-            }
+            } 
+            $sumExpensesPaidByUser = array_sum($expensesPaidByUser);
             $sumExpensesIncludingUser = array_sum($expensesIncludingUser);
-
             $balancePerUser = $sumExpensesPaidByUser - $sumExpensesIncludingUser;
+
             $output->writeln("{$user->getName()} {$balancePerUser}");
         }
         
