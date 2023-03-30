@@ -31,7 +31,9 @@ class ViewBalanceCommand extends Command
         $expense4 = new Expense('Materiel', new DateTime('25 march 2023'), 'nouveau materiel', 60, [$andre, $caroline, $benoit], $benoit);
         $expenses = [$expense1,$expense2,$expense3,$expense4];
 
-        //Balance : sum of everything a member paid for the group, then sum of the transactions concerning a member and finally calculate the difference between the two amounts
+        /* Balance : sum of everything a member paid for the group, 
+        then sum of the transactions concerning a member 
+        and finally calculate the difference between the two amounts */
         foreach($users as $user)
         {
             $expensesPaidByUser = [];

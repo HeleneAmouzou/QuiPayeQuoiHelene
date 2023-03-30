@@ -3,7 +3,7 @@
 namespace App\Model;
 
 class User {
-    private array $expenses;
+    private array $expenses = [];
 
     public function __construct(
         private string $name,
