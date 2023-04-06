@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
-#[Table(name:'group')]
+#[Table(name:'`group`')]
 class Group {
     #[Id]
     #[Column(type: Types::INTEGER)]
@@ -23,10 +24,10 @@ class Group {
     private string $name;
 
     #[ManyToMany(targetEntity: User::class, inversedBy:'groups')]
-    private array $members;
+    private Collection $members;
 
     #[OneToMany(targetEntity: Expense::class, mappedBy:'group')]
-    private array $expensesOfTheGroup;
+    private Collection $expensesOfTheGroup;
 
     public function __construct(
         string $name,
@@ -53,7 +54,7 @@ class Group {
         $this->members = $members;
     }
 
-    public function getMembers(): array
+    public function getMembers(): Collection
     {
         return $this->members;
     }
@@ -63,7 +64,7 @@ class Group {
         $this->expensesOfTheGroup = $expensesOfTheGroup;
     }
 
-    public function getExpensesOfTheGroup(): array
+    public function getExpensesOfTheGroup(): Collection
     {
         return $this->expensesOfTheGroup;
     }

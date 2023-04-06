@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -29,13 +30,13 @@ class User {
     private string $mail;
 
     #[ManyToMany(targetEntity: Expense::class, mappedBy:'participants')]
-    private array $expensesAsParticipant;
+    private Collection $expensesAsParticipant;
 
     #[OneToMany(targetEntity: Expense::class, mappedBy:'payer')]
-    private array $expensesAsPayer;
+    private Collection $expensesAsPayer;
 
     #[ManyToMany(targetEntity: Group::class, mappedBy:'members')]
-    private array $groups;
+    private Collection $groups;
 
     public function __construct(
         string $name,
@@ -52,6 +53,11 @@ class User {
         $this->expensesAsPayer = $expensesAsPayer;
         $this->groups = $groups;
     }
+
+    public function getId(): int
+        {
+            return $this->id;
+        }
 
     public function setName(string $name): void
     {
@@ -83,32 +89,32 @@ class User {
         return $this->mail;
     }
 
-    public function setExpensesAsParticipant(array $expensesAsParticipant): void
+    public function setExpensesAsParticipant(Collection $expensesAsParticipant): void
     {
         $this->expensesAsParticipant = $expensesAsParticipant;
     }
 
-    public function getExpensesAsParticipant(): array
+    public function getExpensesAsParticipant(): Collection
     {
         return $this->expensesAsParticipant;
     }
 
-    public function setExpensesAsPayer(array $expensesAsPayer): void
+    public function setExpensesAsPayer(Collection $expensesAsPayer): void
     {
         $this->expensesAsPayer = $expensesAsPayer;
     }
 
-    public function getExpensesAsPayer(): array
+    public function getExpensesAsPayer(): Collection
     {
         return $this->expensesAsPayer;
     }
 
-    public function setGroups(array $groups): void
+    public function setGroups(Collection $groups): void
     {
         $this->groups = $groups;
     }
 
-    public function getGroups(): array
+    public function getGroups(): Collection
     {
         return $this->groups;
     }

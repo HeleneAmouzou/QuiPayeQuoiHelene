@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Model\Expense;
-use App\Model\User;
-use DateTime;
+use App\Entity\Group;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,47 +17,45 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class ViewBalanceCommand extends Command
 {
+    public function __construct(private ManagerRegistry $doctrine)
+    {
+        parent::__construct();
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $andre = new User('Andre','Toto','andre@gmail.com');
-        $caroline = new User('Caroline', 'Titi','caro@gmail.com');
-        $benoit = new User('Benoit', 'Tutu', 'benoit@gmail.com');
-        $users = [$andre,$caroline,$benoit];
-        
-        $expense1 = new Expense('essence', new DateTime('20 march 2023'), 'plein d\'essence pour aller au match', 30, [$andre, $caroline, $benoit], $andre);
-        $expense2 = new Expense('souvenir', new DateTime('21 march 2023'), 'souvenir de notre tournoi à Caen', 20, [$andre, $benoit], $andre);
-        $expense3 = new Expense('bar', new DateTime('24 march 2023'), 'tournee', 15, [$caroline, $benoit], $caroline);
-        $expense4 = new Expense('Materiel', new DateTime('25 march 2023'), 'nouveau materiel', 60, [$andre, $caroline, $benoit], $benoit);
-        $expenses = [$expense1,$expense2,$expense3,$expense4];
+        $groupRepository = $this->doctrine->getRepository(Group::class);
+        $group = $groupRepository->findOneBy(['name' => 'bad']);
+        $members = $group->getMembers();
+        $groupExpenses = $group->getExpensesOfTheGroup();
+        $groupBalance = [];
 
-        /* Balance : sum of everything a member paid for the group, 
-        then sum of the transactions concerning a member 
-        and finally calculate the difference between the two amounts */
-        foreach($users as $user)
-        {
-            $expensesPaidByUser = [];
-            $expensesIncludingUser = [];
-
-            foreach($expenses as $expense)
-            {
-                if ($expense->getPayer() == $user)
-                {
-                    $expensesPaidByUser [] = $expense->getAmount();
-                }
-                
-                if (in_array($user, ($expense->getParticipants())))
-                {
-                    $expensesIncludingUser [] = $expense->getAmount()/(count($expense->getParticipants()));
-                }
-            } 
-            
-            $sumExpensesPaidByUser = array_sum($expensesPaidByUser);
-            $sumExpensesIncludingUser = array_sum($expensesIncludingUser);
-            $balancePerUser = $sumExpensesPaidByUser - $sumExpensesIncludingUser;
-
-            $output->writeln("{$user->getName()} {$balancePerUser}");
+        foreach ($members as $member) {
+            $groupBalance[$member->getId()]= 0;
         }
-        
+
+        foreach ($groupExpenses as $groupExpense) {
+            $payer = $groupExpense->getPayer();
+            $expenseAmount = $groupExpense->getAmount();
+            $amountPerParticipant = $expenseAmount/(count($groupExpense->getParticipants()));
+
+           foreach ($members as $member) {
+                if ($member == $payer) {
+                    $groupBalance[$member->getId()]+=$expenseAmount;
+                }
+
+                if (in_array($member,$groupExpense->getParticipants()->toArray())) {
+                    $groupBalance[$member->getId()]-=$amountPerParticipant;
+                }
+            }
+        }
+
+        foreach($groupBalance as $key => $memberBalance){
+            $currentMember = array_filter($members->toArray(), fn($member) => $member->getId() == $key);
+            $memberName = array_pop($currentMember)->getName();
+            $output->writeln("{$memberName} {$memberBalance}");
+        }
+
         return Command::SUCCESS;
     }
 }

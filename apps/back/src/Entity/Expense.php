@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -26,14 +27,14 @@ class Expense {
     private string $name;
 
     #[Column(type: Types::DATETIME_IMMUTABLE)]
-    private DateTime $date;
+    private \DateTimeImmutable $date;
 
     #[Column(type: Types::INTEGER)]
     private int $amount;
 
     #[ManyToMany(targetEntity: User::class, inversedBy:'expensesAsParticipant')]
     #[JoinTable(name: 'users_expenses_as_participant')]
-    private array $participants;
+    private Collection $participants;
 
     #[ManyToOne(targetEntity: User::class, inversedBy: 'expensesAsPayer')]
     #[JoinColumn(name: 'payer_id', referencedColumnName: 'id')]
@@ -45,7 +46,7 @@ class Expense {
 
     public function __construct(
         string $name,
-        \DateTime $date,
+        \DateTimeImmutable $date,
         int $amount,
         array $participants,
         User $payer,
@@ -69,12 +70,12 @@ class Expense {
         return $this->name;
     }
 
-    public function setDate(\DateTime $date): void
+    public function setDate(\DateTimeImmutable $date): void
     {
         $this->date = $date;
     }
 
-    public function getDate(): \DateTime
+    public function getDate(): \DateTimeImmutable
     {
         return $this->date;
     }
@@ -89,12 +90,12 @@ class Expense {
         return $this->amount;
     }
 
-    public function setParticipants(array $participants): void
+    public function setParticipants(Collection $participants): void
     {
         $this->participants = $participants;
     }
 
-    public function getParticipants(): array
+    public function getParticipants(): Collection
     {
         return $this->participants;
     }
