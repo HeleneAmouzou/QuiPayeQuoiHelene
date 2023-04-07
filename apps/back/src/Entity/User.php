@@ -55,9 +55,9 @@ class User {
     }
 
     public function getId(): int
-        {
-            return $this->id;
-        }
+    {
+        return $this->id;
+    }
 
     public function setName(string $name): void
     {

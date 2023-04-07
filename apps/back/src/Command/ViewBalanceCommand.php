@@ -42,12 +42,11 @@ class ViewBalanceCommand extends Command
             }
 
            foreach ($members as $member) {
-            if(!isset($groupBalance[$member->getId()])){
+            if (!isset($groupBalance[$member->getId()])) {
                 $groupBalance[$member->getId()]=0;
             }
-                if ($member == $payer) {
+                if ($member === $payer) {
                    $groupBalance[$member->getId()]+=$expenseAmount;
-
                 }
 
                 if (in_array($member,$groupExpense->getParticipants()->toArray())) {
