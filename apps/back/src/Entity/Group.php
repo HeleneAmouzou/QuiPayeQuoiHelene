@@ -31,8 +31,8 @@ class Group {
 
     public function __construct(
         string $name,
-        array $members,
-        array $expensesOfTheGroup
+        Collection $members,
+        Collection $expensesOfTheGroup
     ) {
         $this->name = $name;
         $this->members = $members;
@@ -59,7 +59,7 @@ class Group {
         return $this->members;
     }
 
-    public function setExpensesOfTheGroup(array $expensesOfTheGroup): void
+    public function setExpensesOfTheGroup(Collection $expensesOfTheGroup): void
     {
         $this->expensesOfTheGroup = $expensesOfTheGroup;
     }

@@ -37,6 +37,7 @@ services:
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: No!ss@r2022
+            MYSQL_USER: root
     adminer:
         image: adminer
         restart: always

@@ -14,7 +14,7 @@ final class Version20230405075639 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Update entities to add associations';
     }
 
     public function up(Schema $schema): void

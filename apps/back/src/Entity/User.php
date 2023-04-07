@@ -42,9 +42,9 @@ class User {
         string $name,
         string $surname,
         string $mail,
-        array $expensesAsParticipant,
-        array $expensesAsPayer,
-        array $groups
+        Collection $expensesAsParticipant,
+        Collection $expensesAsPayer,
+        Collection $groups
     ) {
         $this->name = $name;
         $this->surname = $surname;

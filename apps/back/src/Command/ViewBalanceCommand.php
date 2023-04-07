@@ -26,28 +26,34 @@ class ViewBalanceCommand extends Command
     {
         $groupRepository = $this->doctrine->getRepository(Group::class);
         $group = $groupRepository->findOneBy(['name' => 'bad']);
+        if ($group === null) {
+            return COMMAND::FAILURE;
+        }
         $members = $group->getMembers();
         $groupExpenses = $group->getExpensesOfTheGroup();
         $groupBalance = [];
-
-        foreach ($members as $member) {
-            $groupBalance[$member->getId()]= 0;
-        }
 
         foreach ($groupExpenses as $groupExpense) {
             $payer = $groupExpense->getPayer();
             $expenseAmount = $groupExpense->getAmount();
             $amountPerParticipant = $expenseAmount/(count($groupExpense->getParticipants()));
+            if (count($groupExpense->getParticipants()) <= 0) {
+                return COMMAND::FAILURE;
+            }
 
            foreach ($members as $member) {
+            if(!isset($groupBalance[$member->getId()])){
+                $groupBalance[$member->getId()]=0;
+            }
                 if ($member == $payer) {
-                    $groupBalance[$member->getId()]+=$expenseAmount;
+                   $groupBalance[$member->getId()]+=$expenseAmount;
+
                 }
 
                 if (in_array($member,$groupExpense->getParticipants()->toArray())) {
-                    $groupBalance[$member->getId()]-=$amountPerParticipant;
+                   $groupBalance[$member->getId()]-=$amountPerParticipant;
                 }
-            }
+             }
         }
 
         foreach($groupBalance as $key => $memberBalance){

@@ -48,7 +48,7 @@ class Expense {
         string $name,
         \DateTimeImmutable $date,
         int $amount,
-        array $participants,
+        Collection $participants,
         User $payer,
         Group $group
     ) {
