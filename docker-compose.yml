@@ -23,6 +23,9 @@ services:
             - '.env:/usr/src/app/.env'
         restart: unless-stopped
         command: [ "php-fpm" ]
+        depends_on:
+            db:
+              condition: service_healthy
     nginx:
         image: nginx:1.21.3-alpine
         ports:
@@ -32,14 +35,21 @@ services:
             - ./public:/usr/src/app/public
         restart: unless-stopped
     db:
-        image: mysql
-        command: --default-authentication-plugin=mysql_native_password
-        restart: always
+        image: mysql:8.0.32
+        restart: unless-stopped
+        volumes:
+          - db:/var/lib/mysql
+        healthcheck:
+          test: [CMD, mysqladmin, ping, --silent]
         environment:
-            MYSQL_ROOT_PASSWORD: No!ss@r2022
-            MYSQL_USER: root
+          - MYSQL_RANDOM_ROOT_PASSWORD=yes
+          - MYSQL_DATABASE=${DB_NAME}
+          - MYSQL_USER=${DB_USER}
+          - MYSQL_PASSWORD=${DB_PASSWORD}
     adminer:
         image: adminer
-        restart: always
+        restart: unless-stopped
         ports:
             - 8080:8080
+volumes:
+    db:

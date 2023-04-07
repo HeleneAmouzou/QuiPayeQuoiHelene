@@ -23,41 +23,29 @@ class Expense {
     #[GeneratedValue(strategy:'IDENTITY')]
     private int $id;
 
-    #[Column(length: 140)]
-    private string $name;
-
-    #[Column(type: Types::DATETIME_IMMUTABLE)]
-    private \DateTimeImmutable $date;
-
-    #[Column(type: Types::INTEGER)]
-    private int $amount;
-
-    #[ManyToMany(targetEntity: User::class, inversedBy:'expensesAsParticipant')]
-    #[JoinTable(name: 'users_expenses_as_participant')]
-    private Collection $participants;
-
-    #[ManyToOne(targetEntity: User::class, inversedBy: 'expensesAsPayer')]
-    #[JoinColumn(name: 'payer_id', referencedColumnName: 'id')]
-    private User $payer;
-
-    #[ManyToOne(targetEntity: Group::class, inversedBy: 'expensesOfTheGroup')]
-    #[JoinColumn(name: 'group_id', referencedColumnName: 'id')]
-    private Group $group;
-
     public function __construct(
-        string $name,
-        \DateTimeImmutable $date,
-        int $amount,
-        Collection $participants,
-        User $payer,
-        Group $group
+
+        #[Column(length: 140)]
+        private string $name,
+
+        #[Column(type: Types::DATETIME_IMMUTABLE)]
+        private \DateTimeImmutable $date,
+
+        #[Column(type: Types::INTEGER)]
+        private int $amount,
+
+        #[ManyToMany(targetEntity: User::class, inversedBy:'expensesAsParticipant')]
+        #[JoinTable(name: 'users_expenses_as_participant')]
+        private Collection $participants,
+
+        #[ManyToOne(targetEntity: User::class, inversedBy: 'expensesAsPayer')]
+        #[JoinColumn(name: 'payer_id', referencedColumnName: 'id')]
+        private User $payer,
+
+        #[ManyToOne(targetEntity: Group::class, inversedBy: 'expensesOfTheGroup')]
+        #[JoinColumn(name: 'group_id', referencedColumnName: 'id')]
+        private Group $group
     ) {
-        $this->name = $name;
-        $this->date = $date;
-        $this->amount = $amount;
-        $this->participants = $participants;
-        $this->payer = $payer;
-        $this->group = $group;
     }
 
     public function setName(string $name): void

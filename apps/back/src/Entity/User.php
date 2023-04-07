@@ -16,42 +16,29 @@ use Doctrine\ORM\Mapping\Table;
 #[Table(name: 'user')]
 class User {
     #[Id]
-    #[Column(type: Types::INTEGER)]
-    #[GeneratedValue(strategy:'IDENTITY')]
-    private int $id;
-
-    #[Column(length: 140)]
-    private string $name;
-
-    #[Column(length: 140)]
-    private string $surname;
-
-    #[Column(length: 255)]
-    private string $mail;
-
-    #[ManyToMany(targetEntity: Expense::class, mappedBy:'participants')]
-    private Collection $expensesAsParticipant;
-
-    #[OneToMany(targetEntity: Expense::class, mappedBy:'payer')]
-    private Collection $expensesAsPayer;
-
-    #[ManyToMany(targetEntity: Group::class, mappedBy:'members')]
-    private Collection $groups;
+        #[Column(type: Types::INTEGER)]
+        #[GeneratedValue(strategy:'IDENTITY')]
+        private int $id;
 
     public function __construct(
-        string $name,
-        string $surname,
-        string $mail,
-        Collection $expensesAsParticipant,
-        Collection $expensesAsPayer,
-        Collection $groups
+        #[Column(length: 140)]
+        private string $name,
+
+        #[Column(length: 140)]
+        private string $surname,
+
+        #[Column(length: 255)]
+        private string $mail,
+
+        #[ManyToMany(targetEntity: Expense::class, mappedBy:'participants')]
+        private Collection $expensesAsParticipant,
+
+        #[OneToMany(targetEntity: Expense::class, mappedBy:'payer')]
+        private Collection $expensesAsPayer,
+
+        #[ManyToMany(targetEntity: Group::class, mappedBy:'members')]
+        private Collection $groups
     ) {
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->mail = $mail;
-        $this->expensesAsParticipant = $expensesAsParticipant;
-        $this->expensesAsPayer = $expensesAsPayer;
-        $this->groups = $groups;
     }
 
     public function getId(): int

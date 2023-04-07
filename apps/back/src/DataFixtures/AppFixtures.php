@@ -15,7 +15,6 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $bad = new Group('bad', new ArrayCollection([]), new ArrayCollection([]));
-        $manager->persist($bad);
 
         $andre = new User('Andre', 'Toto', 'andre@gmail.com', new ArrayCollection([]), new ArrayCollection([]), new ArrayCollection([$bad]));
         $caro = new User('Caroline', 'Titi', 'caro@gmail.com', new ArrayCollection([]), new ArrayCollection([]), new ArrayCollection([$bad]));
@@ -23,6 +22,11 @@ class AppFixtures extends Fixture
         $manager->persist($andre);
         $manager->persist($caro);
         $manager->persist($benoit);
+
+        $bad->addMember($andre);
+        $bad->addMember($caro);
+        $bad->addMember($benoit);
+        $manager->persist($bad);
 
         $expense1 = new Expense('essence', new DateTimeImmutable(), 30, new ArrayCollection([$andre, $caro, $benoit]), $andre, $bad);
         $expense2 = new Expense('location terrain', new DateTimeImmutable(), 90, new ArrayCollection([$caro, $benoit]), $caro, $bad);

@@ -16,27 +16,21 @@ use Doctrine\ORM\Mapping\Table;
 #[Table(name:'`group`')]
 class Group {
     #[Id]
-    #[Column(type: Types::INTEGER)]
-    #[GeneratedValue(strategy:'IDENTITY')]
-    private int $id;
-
-    #[Column(length: 140)]
-    private string $name;
-
-    #[ManyToMany(targetEntity: User::class, inversedBy:'groups')]
-    private Collection $members;
-
-    #[OneToMany(targetEntity: Expense::class, mappedBy:'group')]
-    private Collection $expensesOfTheGroup;
+        #[Column(type: Types::INTEGER)]
+        #[GeneratedValue(strategy:'IDENTITY')]
+        private int $id;
 
     public function __construct(
-        string $name,
-        Collection $members,
-        Collection $expensesOfTheGroup
+
+        #[Column(length: 140)]
+        private string $name,
+
+        #[ManyToMany(targetEntity: User::class, inversedBy:'groups')]
+        private Collection $members,
+
+        #[OneToMany(targetEntity: Expense::class, mappedBy:'group')]
+        private Collection $expensesOfTheGroup
     ) {
-        $this->name = $name;
-        $this->members = $members;
-        $this->expensesOfTheGroup = $expensesOfTheGroup;
     }
 
     public function setName(string $name): void
@@ -67,5 +61,10 @@ class Group {
     public function getExpensesOfTheGroup(): Collection
     {
         return $this->expensesOfTheGroup;
+    }
+
+    public function addMember(User $user): void
+    {
+        $this->members[] = $user;
     }
 }

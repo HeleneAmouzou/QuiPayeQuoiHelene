@@ -56,8 +56,15 @@ class ViewBalanceCommand extends Command
         }
 
         foreach($groupBalance as $key => $memberBalance){
-            $currentMember = array_filter($members->toArray(), fn($member) => $member->getId() == $key);
-            $memberName = array_pop($currentMember)->getName();
+            $currentMembers = array_values(array_filter($members->toArray(), fn($member) => $member->getId() === $key));
+
+            if (empty($currentMembers)) {
+                continue;
+            }
+
+            $currentMember = $currentMembers[0];
+            $memberName = $currentMember->getName();
+
             $output->writeln("{$memberName} {$memberBalance}");
         }
 

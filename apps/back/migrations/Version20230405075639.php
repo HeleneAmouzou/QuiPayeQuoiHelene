@@ -19,7 +19,6 @@ final class Version20230405075639 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE expense (id INT AUTO_INCREMENT NOT NULL, payer_id INT DEFAULT NULL, group_id INT DEFAULT NULL, name VARCHAR(140) NOT NULL, date DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', amount INT NOT NULL, INDEX IDX_2D3A8DA6C17AD9A9 (payer_id), INDEX IDX_2D3A8DA6FE54D947 (group_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE users_expenses_as_participant (expense_id INT NOT NULL, user_id INT NOT NULL, INDEX IDX_13F88584F395DB7B (expense_id), INDEX IDX_13F88584A76ED395 (user_id), PRIMARY KEY(expense_id, user_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE `group` (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(140) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -35,7 +34,6 @@ final class Version20230405075639 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE expense DROP FOREIGN KEY FK_2D3A8DA6C17AD9A9');
         $this->addSql('ALTER TABLE expense DROP FOREIGN KEY FK_2D3A8DA6FE54D947');
         $this->addSql('ALTER TABLE users_expenses_as_participant DROP FOREIGN KEY FK_13F88584F395DB7B');
