@@ -36,13 +36,14 @@ class ViewBalanceCommand extends Command
         foreach ($groupExpenses as $groupExpense) {
             $payer = $groupExpense->getPayer();
             $expenseAmount = $groupExpense->getAmount();
-            $amountPerParticipant = $expenseAmount/(count($groupExpense->getParticipants()));
-            if (count($groupExpense->getParticipants()) <= 0) {
+            if (count($groupExpense->getParticipants()) > 0) {
+                $amountPerParticipant = $expenseAmount/(count($groupExpense->getParticipants()));
+            } else {
                 return COMMAND::FAILURE;
             }
 
            foreach ($members as $member) {
-            if (!isset($groupBalance[$member->getId()])) {
+            if (!array_key_exists($member->getId(), $groupBalance)) {
                 $groupBalance[$member->getId()]=0;
             }
                 if ($member === $payer) {
