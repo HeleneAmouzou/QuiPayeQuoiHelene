@@ -7,13 +7,11 @@ erDiagram
     USER }|--|{ EXPENSE : "is concerned by"
 
 USER {
-    String username
-    String name 
+    String name
     String surname
-    String mail 
-    String phoneNumber
+    String mail
 }
-    
+
 GROUP {
     String name
 }
@@ -21,8 +19,7 @@ GROUP {
 EXPENSE {
     String name
     DateTime date
-    String description 
-    int amount 
+    int amount
 }
 
 ```
