@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use DateTime;
+use App\Exception\ExpenseWithoutParticipantsException;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
@@ -46,6 +46,9 @@ class Expense {
         #[JoinColumn(name: 'group_id', referencedColumnName: 'id')]
         private Group $group
     ) {
+        if ($participants->isEmpty()) {
+            throw new ExpenseWithoutParticipantsException();
+        }
     }
 
     public function setName(string $name): void
