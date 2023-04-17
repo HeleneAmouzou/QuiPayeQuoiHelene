@@ -34,6 +34,7 @@ class ViewBalanceCommand extends Command
         $groupRepository = $this->doctrine->getRepository(Group::class);
         $group = $groupRepository->findOneBy(['name' => $groupName]);
         if ($group === null) {
+            $output->writeln("Ce groupe n'existe pas.");
             return COMMAND::FAILURE;
         }
         $members = $group->getMembers();
