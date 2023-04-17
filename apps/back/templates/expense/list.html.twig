@@ -5,5 +5,31 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Liste des dépenses</h1>
+    <h2>Groupe : {{ group.getName() }}</h2>
+    <h2>Liste des dépenses</h2>
+    <div>
+        <table>
+            <tr>
+                <th>Nom<br>Payé par</th>
+                <th>Date</th>
+                <th>Montant</th>
+                <th>Participants</th>
+            </tr>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.name }} <br> {{ expense.payer.getName() }}</td>
+                <td>{{ expense.date|date('d/m/Y') }}</td>
+                <td>{{ expense.amount|divide_by_100() }} €</td>
+                <td>{{ expense.getParticipants.count }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <br>
+    <div>
+        <a href="{{ path('expense_add') }}"><button type="button">Ajouter une dépense</button></a>
+        <button type="button">Afficher la balance</button>
+        <br>
+        <button type="button">Retour</button>
+    </div>
 {% endblock %}

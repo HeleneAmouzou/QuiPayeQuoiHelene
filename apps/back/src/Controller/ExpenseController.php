@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Expense;
+use App\Entity\Group;
 use App\Exception\ExpenseWithoutParticipantsException;
 use App\Form\ExpenseType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,10 +16,22 @@ use Throwable;
 #[Route('/expense', name: 'expense')]
 class ExpenseController extends AbstractController
 {
-    #[Route('/list', name: '_list')]
-    public function expensesList(): Response
+    #[Route('/list/{groupName}', name: '_list')]
+    public function expenseList(
+        EntityManagerInterface $em,
+        string $groupName,
+    ): Response
     {
-        return $this->render('expense/list.html.twig', []);
+        $expenseRepository = $em->getRepository(Expense::class);
+        $expenses = $expenseRepository->findBy([], ['date' => 'DESC']);
+
+        $groupRepository = $em->getRepository(Group::class);
+        $group = $groupRepository->findOneBy(['name' => $groupName]);
+
+        return $this->render('expense/list.html.twig', [
+            'expenses' => $expenses,
+            'group' => $group,
+        ]);
     }
 
     #[Route('/add', name: '_add')]
