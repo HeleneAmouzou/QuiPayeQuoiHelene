@@ -16,9 +16,9 @@ use Doctrine\ORM\Mapping\Table;
 #[Table(name:'`group`')]
 class Group {
     #[Id]
-        #[Column(type: Types::INTEGER)]
-        #[GeneratedValue(strategy:'IDENTITY')]
-        private int $id;
+    #[Column(type: Types::INTEGER)]
+    #[GeneratedValue(strategy:'IDENTITY')]
+    private int $id;
 
     public function __construct(
 
@@ -66,5 +66,10 @@ class Group {
     public function addMember(User $user): void
     {
         $this->members[] = $user;
+    }
+
+    public function __toString()
+    {
+        return ($this->getName());
     }
 }

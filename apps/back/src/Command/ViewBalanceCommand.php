@@ -8,6 +8,7 @@ use App\Entity\Group;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -22,11 +23,18 @@ class ViewBalanceCommand extends Command
         parent::__construct();
     }
 
+    public function configure(): void
+    {
+        $this->addArgument('groupName', InputArgument::REQUIRED, 'nom du groupe');
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $groupName = $input->getArgument('groupName');
         $groupRepository = $this->doctrine->getRepository(Group::class);
-        $group = $groupRepository->findOneBy(['name' => 'bad']);
+        $group = $groupRepository->findOneBy(['name' => $groupName]);
         if ($group === null) {
+            $output->writeln("Ce groupe n'existe pas.");
             return COMMAND::FAILURE;
         }
         $members = $group->getMembers();
