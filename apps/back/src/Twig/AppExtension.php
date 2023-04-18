@@ -10,13 +10,16 @@ class AppExtension extends AbstractExtension
     public function getFilters(): array
     {
         return array(
-            new TwigFilter('divide_by_100', array($this, 'divideBy100')),
+            new TwigFilter('format_currency', array($this, 'formatCurrency')),
         );
     }
 
-    public function divideBy100($amount): float
+    public function formatCurrency($number, $decimals = 2, $decPoint = '.', $thousandsSep = ','): string
     {
-        $amount = $amount/100;
+        $number = $number / 100;
+        $amount = number_format($number, $decimals, $decPoint, $thousandsSep);
+        $amount = $amount.'€';
+
         return $amount;
     }
 }

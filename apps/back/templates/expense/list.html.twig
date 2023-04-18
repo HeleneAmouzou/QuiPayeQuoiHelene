@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ expense.name }} <br> {{ expense.payer.getName() }}</td>
                 <td>{{ expense.date|date('d/m/Y') }}</td>
-                <td>{{ expense.amount|divide_by_100() }} €</td>
+                <td>{{ expense.amount|format_currency() }}</td>
                 <td>{{ expense.getParticipants.count }}</td>
             </tr>
             {% endfor %}
@@ -27,9 +27,8 @@
     </div>
     <br>
     <div>
-        <a href="{{ path('expense_add') }}"><button type="button">Ajouter une dépense</button></a>
-        <button type="button">Afficher la balance</button>
-        <br>
-        <button type="button">Retour</button>
+        <a href="{{ path('expense_add') }}">Ajouter une dépense</a>
+        <a href="#">Afficher la balance</a>
+        <a href="#">Retour</a>
     </div>
 {% endblock %}
