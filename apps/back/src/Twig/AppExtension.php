@@ -9,9 +9,9 @@ class AppExtension extends AbstractExtension
 {
     public function getFilters(): array
     {
-        return array(
+        return [
             new TwigFilter('format_currency', array($this, 'formatCurrency')),
-        );
+        ];
     }
 
     public function formatCurrency($number, $decimals = 2, $decPoint = '.', $thousandsSep = ','): string

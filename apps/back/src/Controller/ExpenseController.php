@@ -28,10 +28,14 @@ class ExpenseController extends AbstractController
         $expenseRepository = $em->getRepository(Expense::class);
         $expenses = $expenseRepository->findBy(['group' => $group], ['date' => 'DESC']);
 
-        return $this->render('expense/list.html.twig', [
-            'expenses' => $expenses,
-            'group' => $group,
-        ]);
+        if($group !== null) {
+            return $this->render('expense/list.html.twig', [
+                'expenses' => $expenses,
+                'group' => $group,
+            ]);
+        } else {
+            return new Response(Response::HTTP_NOT_FOUND);
+        }
     }
 
     #[Route('/add', name: '_add')]
