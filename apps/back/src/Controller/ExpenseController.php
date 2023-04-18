@@ -22,11 +22,11 @@ class ExpenseController extends AbstractController
         string $groupName,
     ): Response
     {
-        $expenseRepository = $em->getRepository(Expense::class);
-        $expenses = $expenseRepository->findBy([], ['date' => 'DESC']);
-
         $groupRepository = $em->getRepository(Group::class);
         $group = $groupRepository->findOneBy(['name' => $groupName]);
+
+        $expenseRepository = $em->getRepository(Expense::class);
+        $expenses = $expenseRepository->findBy(['group' => $group], ['date' => 'DESC']);
 
         return $this->render('expense/list.html.twig', [
             'expenses' => $expenses,
