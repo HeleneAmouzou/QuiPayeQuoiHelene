@@ -14,12 +14,11 @@ class AppExtension extends AbstractExtension
         ];
     }
 
-    public function formatCurrency($number, $decimals = 2, $decPoint = '.', $thousandsSep = ','): string
+    public function formatCurrency($amount): string
     {
-        $number = $number / 100;
-        $amount = number_format($number, $decimals, $decPoint, $thousandsSep);
-        $amount = $amount.'€';
+        $amountFormatted = substr_replace($amount, ',', -2, 0);
+        $amountFormatted = $amountFormatted . '€';
 
-        return $amount;
+        return $amountFormatted ;
     }
 }
