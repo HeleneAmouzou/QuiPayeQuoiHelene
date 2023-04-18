@@ -25,12 +25,8 @@ class ExpenseController extends AbstractController
         $groupRepository = $em->getRepository(Group::class);
         $group = $groupRepository->findOneBy(['name' => $groupName]);
 
-        $expenseRepository = $em->getRepository(Expense::class);
-        $expenses = $expenseRepository->findBy(['group' => $group], ['date' => 'DESC']);
-
         if($group !== null) {
             return $this->render('expense/list.html.twig', [
-                'expenses' => $expenses,
                 'group' => $group,
             ]);
         } else {

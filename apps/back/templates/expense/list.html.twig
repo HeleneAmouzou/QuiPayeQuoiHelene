@@ -15,19 +15,23 @@
                 <th>Montant</th>
                 <th>Participants</th>
             </tr>
-            {% for expense in expenses %}
-            <tr>
-                <td>{{ expense.name }} {{ expense.payer.getName() }}</td>
-                <td>{{ expense.date|date('d/m/Y') }}</td>
-                <td>{{ expense.amount|format_currency() }}</td>
-                <td>{{ expense.getParticipants.count }}</td>
-            </tr>
-            {% endfor %}
+            {% if group.expensesOfTheGroup is null %}
+                <p>Ce groupe n'a pas encore de dépense.</p>
+            {% else %}
+                {% for expense in group.expensesOfTheGroup|sort((b,a) => a.date <=> b.date) %}
+                <tr>
+                    <td>{{ expense.name }} {{ expense.payer.name }}</td>
+                    <td>{{ expense.date|date('d/m/Y') }}</td>
+                    <td>{{ expense.amount|format_currency }}</td>
+                    <td>{{ expense.participants|length }}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
         </table>
     </div>
     <div>
         <a href="{{ path('expense_add') }}">Ajouter une dépense</a>
-        <a href="#">Afficher la balance</a>
+        <a href="#">Afficher le bilan</a>
         <a href="#">Retour</a>
     </div>
 {% endblock %}
