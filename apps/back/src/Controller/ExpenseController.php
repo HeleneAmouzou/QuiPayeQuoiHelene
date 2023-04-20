@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Throwable;
 
@@ -26,7 +27,7 @@ class ExpenseController extends AbstractController
         $group = $groupRepository->findOneBy(['name' => $groupName]);
 
         if($group === null) {
-            return new Response(Response::HTTP_NOT_FOUND);
+            throw new NotFoundHttpException('Ce groupe n\'existe pas.');
         }
 
         return $this->render('expense/list.html.twig', [
