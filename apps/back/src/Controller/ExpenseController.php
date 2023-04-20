@@ -25,13 +25,13 @@ class ExpenseController extends AbstractController
         $groupRepository = $em->getRepository(Group::class);
         $group = $groupRepository->findOneBy(['name' => $groupName]);
 
-        if($group !== null) {
-            return $this->render('expense/list.html.twig', [
-                'group' => $group,
-            ]);
-        } else {
+        if($group === null) {
             return new Response(Response::HTTP_NOT_FOUND);
         }
+
+        return $this->render('expense/list.html.twig', [
+            'group' => $group,
+        ]);
     }
 
     #[Route('/add', name: '_add')]
