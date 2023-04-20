@@ -15,18 +15,16 @@
                 <th>Montant</th>
                 <th>Participants</th>
             </tr>
-            {% if group.expensesOfTheGroup is null %}
-                <p>Ce groupe n'a pas encore de dépense.</p>
-            {% else %}
-                {% for expense in group.expensesOfTheGroup|sort((b,a) => a.date <=> b.date) %}
+            {% for expense in group.expensesOfTheGroup|sort((b,a) => a.date <=> b.date) %}
                 <tr>
                     <td>{{ expense.name }} {{ expense.payer.name }}</td>
                     <td>{{ expense.date|date('d/m/Y') }}</td>
                     <td>{{ expense.amount|format_currency }}</td>
                     <td>{{ expense.participants|length }}</td>
                 </tr>
-                {% endfor %}
-            {% endif %}
+            {% else %}
+                <p>Ce groupe n'a pas encore de dépense.</p>
+            {% endfor %}
         </table>
     </div>
     <div>
