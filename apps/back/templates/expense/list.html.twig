@@ -20,7 +20,11 @@
                     <td>{{ expense.name }} {{ expense.payer.name }}</td>
                     <td>{{ expense.date|date('d/m/Y') }}</td>
                     <td>{{ expense.amount|format_currency }}</td>
-                    <td>{{ expense.participants|length }}</td>
+                    <td>
+                    {% for participant in expense.participants %}
+                        {{ participant }}
+                    {% endfor %}
+                    </td>
                 </tr>
             {% else %}
                 <p>Ce groupe n'a pas encore de dépense.</p>
