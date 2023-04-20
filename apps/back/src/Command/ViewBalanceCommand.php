@@ -64,6 +64,8 @@ class ViewBalanceCommand extends Command
              }
         }
 
+        asort($groupBalance);
+
         foreach($groupBalance as $key => $memberBalance){
             $currentMembers = array_values(array_filter($members->toArray(), fn($member) => $member->getId() === $key));
 

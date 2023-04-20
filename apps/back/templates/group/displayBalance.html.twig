@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} > Bilan du groupe
+{% endblock %}
+
+{% block body %}
+     <h2>Groupe : {{ group.name }}</h2>
+     <h2>Balance</h2>
+     <div>
+        <table>
+            <tr>
+            <th>Membre</th>
+            <th>Balance</th>
+            </tr>
+            {% for line in content|split("\n") %}
+            {% set fields = line|split(" ") %}
+                {% if fields|length == 2 %}
+                    <tr>
+                    <td>{{ fields[0] }}</td>
+                    <td>{{ (fields[1]|round(0,'common'))|format_currency}}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+     <div>
+        <a href="#">Retour</a>
+    </div>
+{% endblock %}
