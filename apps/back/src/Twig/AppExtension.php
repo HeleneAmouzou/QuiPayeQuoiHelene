@@ -17,7 +17,7 @@ class AppExtension extends AbstractExtension
     public function formatCurrency($amount): string
     {
         $amountFormatted = substr_replace($amount, '.', -2, 0);
-        $amountFormatted = $amountFormatted . '€';
+        $amountFormatted = $amountFormatted . ' €';
 
         return $amountFormatted ;
     }
