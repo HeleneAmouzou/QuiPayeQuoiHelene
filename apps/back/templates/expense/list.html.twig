@@ -5,5 +5,35 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Liste des dépenses</h1>
+    <h2>Groupe : {{ group.name }}</h2>
+    <h2>Liste des dépenses</h2>
+    <div>
+        <table>
+            <tr>
+                <th>Nom Payé par</th>
+                <th>Date</th>
+                <th>Montant</th>
+                <th>Participants</th>
+            </tr>
+            {% for expense in group.expensesOfTheGroup|sort((b,a) => a.date <=> b.date) %}
+                <tr>
+                    <td>{{ expense.name }} {{ expense.payer.name }}</td>
+                    <td>{{ expense.date|date('d/m/Y') }}</td>
+                    <td>{{ expense.amount|format_currency }}</td>
+                    <td>
+                    {% for participant in expense.participants %}
+                        {{ participant }}
+                    {% endfor %}
+                    </td>
+                </tr>
+            {% else %}
+                <p>Ce groupe n'a pas encore de dépense.</p>
+            {% endfor %}
+        </table>
+    </div>
+    <div>
+        <a href="{{ path('expense_add') }}">Ajouter une dépense</a>
+        <a href="#">Afficher le bilan</a>
+        <a href="#">Retour</a>
+    </div>
 {% endblock %}

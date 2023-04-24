@@ -3,22 +3,36 @@
 namespace App\Controller;
 
 use App\Entity\Expense;
+use App\Entity\Group;
 use App\Exception\ExpenseWithoutParticipantsException;
 use App\Form\ExpenseType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Throwable;
 
 #[Route('/expense', name: 'expense')]
 class ExpenseController extends AbstractController
 {
-    #[Route('/list', name: '_list')]
-    public function expensesList(): Response
+    #[Route('/list/{groupName}', name: '_list')]
+    public function expenseList(
+        EntityManagerInterface $em,
+        string $groupName,
+    ): Response
     {
-        return $this->render('expense/list.html.twig', []);
+        $groupRepository = $em->getRepository(Group::class);
+        $group = $groupRepository->findOneBy(['name' => $groupName]);
+
+        if($group === null) {
+            throw new NotFoundHttpException('Ce groupe n\'existe pas.');
+        }
+
+        return $this->render('expense/list.html.twig', [
+            'group' => $group,
+        ]);
     }
 
     #[Route('/add', name: '_add')]

@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Qui paie quoi ?{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <div>
         {% for label, messages in app.flashes %}
@@ -13,6 +14,9 @@
             {% endfor %}
         {% endfor %}
     </div>
+    <header>
+        <h1>Qui Paye Quoi ?</h1>
+    <header>
     <body>
         {% block body %}{% endblock %}
     </body>
