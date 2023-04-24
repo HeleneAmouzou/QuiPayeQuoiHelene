@@ -17,14 +17,14 @@ use Throwable;
 #[Route('/expense', name: 'expense')]
 class ExpenseController extends AbstractController
 {
-    #[Route('/list/{groupName}', name: '_list')]
+    #[Route('/{id}/list', name: '_list', methods: ['GET'])]
     public function expenseList(
         EntityManagerInterface $em,
-        string $groupName,
+        int $id,
     ): Response
     {
         $groupRepository = $em->getRepository(Group::class);
-        $group = $groupRepository->findOneBy(['name' => $groupName]);
+        $group = $groupRepository->find($id);
 
         if($group === null) {
             throw new NotFoundHttpException('Ce groupe n\'existe pas.');
@@ -35,7 +35,7 @@ class ExpenseController extends AbstractController
         ]);
     }
 
-    #[Route('/add', name: '_add')]
+    #[Route('/add', name: '_add', methods: ['POST', 'GET'])]
     public function addExpense(
         EntityManagerInterface $em,
         Request $request,

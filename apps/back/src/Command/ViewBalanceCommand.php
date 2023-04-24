@@ -24,14 +24,14 @@ class ViewBalanceCommand extends Command
 
     public function configure(): void
     {
-        $this->addArgument('groupName', InputArgument::REQUIRED, 'nom du groupe');
+        $this->addArgument('groupId', InputArgument::REQUIRED, 'id du groupe');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $groupName = $input->getArgument('groupName');
+        $groupId = $input->getArgument('groupId');
 
-        $balance = $this->balanceService->viewBalance($groupName);
+        $balance = $this->balanceService->viewBalance($groupId);
 
         foreach ($balance as $memberName => $memberBalance) {
             $output->writeln("{$memberName} {$memberBalance}");

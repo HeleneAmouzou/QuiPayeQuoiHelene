@@ -17,7 +17,7 @@
             </tr>
             {% for expense in group.expensesOfTheGroup|sort((b,a) => a.date <=> b.date) %}
                 <tr>
-                    <td>{{ expense.name }} {{ expense.payer.name }}</td>
+                    <td>{{ expense.name }} payé par {{ expense.payer.name }}</td>
                     <td>{{ expense.date|date('d/m/Y') }}</td>
                     <td>{{ expense.amount|format_currency }}</td>
                     <td>

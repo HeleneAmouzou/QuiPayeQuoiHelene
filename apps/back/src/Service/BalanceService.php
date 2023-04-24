@@ -12,10 +12,10 @@ class BalanceService
         $this->em = $em;
     }
 
-    public function viewBalance (string $groupName): array
+    public function viewBalance (int $groupId): array
     {
         $groupRepository = $this->em->getRepository(Group::class);
-        $group = $groupRepository->findOneBy(['name' => $groupName]);
+        $group = $groupRepository->find(['id' => $groupId]);
         if ($group === null) {
             return [];
         }
