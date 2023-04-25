@@ -128,19 +128,11 @@ class Expense {
         $expenseAmount = $this->getAmount();
         $amountPerParticipant = $this->getAmountPerParticipant();
 
-        if ($user === $this->getPayer() && $this->getParticipants()->contains($user)) {
-            // L'utilisateur est payeur et participant ;
+        if ($user === $this->getPayer()) {
             $balance += $expenseAmount;
+        }
+        if ($this->getParticipants()->contains($user)) {
             $balance -= $amountPerParticipant;
-        } elseif ($user === $this->getPayer() && !$this->getParticipants()->contains($user)) {
-            // L'utilisateur est payeur mais pas participant ;
-            $balance += $expenseAmount;
-        } elseif ($user !== $this->getPayer() && $this->getParticipants()->contains($user)) {
-            // L'utilisateur n'est pas payeur mais participant ;
-            $balance -= $amountPerParticipant;
-        } else {
-            // L'utilisateur n'est ni payeur ni participant ;
-            $balance = 0;
         }
 
         return $balance;
