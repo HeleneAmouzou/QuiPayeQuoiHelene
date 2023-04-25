@@ -118,7 +118,7 @@ class Expense {
         if ($numberOfParticipants > 0) {
             return $expenseAmount / $numberOfParticipants;
         } else {
-            return 0;
+            throw new ExpenseWithoutParticipantsException();
         }
     }
 
