@@ -12,15 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/group', name: 'group')]
 class GroupController extends AbstractController
 {
-    private EntityManagerInterface $em;
-    private BalanceService $balanceService;
-
     public function __construct(
-        EntityManagerInterface $em,
-        BalanceService $balanceService
+        private readonly EntityManagerInterface $em,
+        private readonly BalanceService $balanceService
     ){
-        $this->em = $em;
-        $this->balanceService = $balanceService;
     }
 
     #[Route('/{groupId}/balance', name: '_balance', methods: ['GET'])]

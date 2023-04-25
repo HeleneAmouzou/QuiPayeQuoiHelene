@@ -7,9 +7,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class BalanceService
 {
-    public function __construct(public EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em)
     {
-        $this->em = $em;
     }
 
     public function viewBalance (int $groupId): array
