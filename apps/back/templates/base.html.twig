@@ -3,7 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Qui paie quoi ?{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     </head>
     <div>
         {% for label, messages in app.flashes %}
@@ -13,11 +17,14 @@
                 </div>
             {% endfor %}
         {% endfor %}
-    </div>
-    <header>
-        <h1>Qui Paye Quoi ?</h1>
+    </div class="container">
+    <header class="container-fluid">
+        {# <h1>Qui Paye Quoi ?</h1> #}
+        <img src="{{ asset('logos/logo-quipaiequoi-titre.png')}}" alt="logo QuiPaieQuoi" class="logo">
     <header>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        <div class="container-fluid"></div>
+        {% endblock %}
     </body>
 </html>
