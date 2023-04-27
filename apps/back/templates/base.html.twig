@@ -9,6 +9,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     </head>
+
     <div>
         {% for label, messages in app.flashes %}
             {% for message in messages %}
@@ -17,14 +18,27 @@
                 </div>
             {% endfor %}
         {% endfor %}
-    </div class="container">
-    <header class="container-fluid">
-        {# <h1>Qui Paye Quoi ?</h1> #}
-        <img src="{{ asset('logos/logo-quipaiequoi-titre.png')}}" alt="logo QuiPaieQuoi" class="logo">
-    <header>
+    </div>
+
+    <nav class="navbar">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-6 col-xl-6 col-xxl-6 left">
+                        <a class="navbar-brand" href="#">
+                            <img src="{{ asset('logos/logo-quipaiequoi-simple-transparent.png')}}" class="img-fluid img-responsive" alt="logo QuiPaieQuoi">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <body>
-        {% block body %}
-        <div class="container-fluid"></div>
-        {% endblock %}
+        <div class="mt-4">
+            {% block body %}
+                <div class="container-fluid"></div>
+            {% endblock %}
+        </div>
     </body>
 </html>
