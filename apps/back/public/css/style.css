@@ -7,6 +7,15 @@ h2 {
     text-align: center;
  }
 
+.bottom-bar {
+    text-align: center;
+    background-color: #041635;
+}
+
+.bottom-bar p {
+    color: white;
+}
+
 table {
     border-collapse: collapse;
     min-width: max-content;
