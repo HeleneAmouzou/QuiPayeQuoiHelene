@@ -5,9 +5,23 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Ajouter une dépense</h1>
-    {{ form_start(expenseForm) }}
-        {{ form_widget(expenseForm) }}
-    {{ form_end(expenseForm) }}
-    <a href="#">Retour</a>
+    <h2 class="mt-4">Ajouter une dépense</h1>
+    <div class="container col-10 col-sm-10 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+        <div class="row mt-4">
+            <div class="d-flex justify-content-center">
+                {{ form_start(expenseForm) }}
+                    {{ form_row(expenseForm.name)}}
+                    {{ form_row(expenseForm.date)}}
+                    {{ form_row(expenseForm.amount)}}
+                    {{ form_row(expenseForm.payer)}}
+                    {{ form_row(expenseForm.participants)}}
+                    {{ form_row(expenseForm.group)}}
+                    {# {{ form_widget(expenseForm) }} #}
+                    <div class="mt-4 mb-2  text-center">
+                        <input type="submit" value="Ajouter" class="btn btn-primary">
+                    </div>
+                {{ form_end(expenseForm) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
