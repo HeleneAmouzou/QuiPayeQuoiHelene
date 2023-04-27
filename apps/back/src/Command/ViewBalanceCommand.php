@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Entity\Group;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Service\BalanceService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,65 +17,27 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class ViewBalanceCommand extends Command
 {
-    public function __construct(private ManagerRegistry $doctrine)
+    public function __construct(private BalanceService $balanceService)
     {
         parent::__construct();
     }
 
     public function configure(): void
     {
-        $this->addArgument('groupName', InputArgument::REQUIRED, 'nom du groupe');
+        $this->addArgument('groupId', InputArgument::REQUIRED, 'id du groupe');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $groupName = $input->getArgument('groupName');
-        $groupRepository = $this->doctrine->getRepository(Group::class);
-        $group = $groupRepository->findOneBy(['name' => $groupName]);
-        if ($group === null) {
-            $output->writeln("Ce groupe n'existe pas.");
-            return COMMAND::FAILURE;
-        }
-        $members = $group->getMembers();
-        $groupExpenses = $group->getExpensesOfTheGroup();
-        $groupBalance = [];
+        $groupId = $input->getArgument('groupId');
 
-        foreach ($groupExpenses as $groupExpense) {
-            $payer = $groupExpense->getPayer();
-            $expenseAmount = $groupExpense->getAmount();
-            if (count($groupExpense->getParticipants()) > 0) {
-                $amountPerParticipant = $expenseAmount/(count($groupExpense->getParticipants()));
-            } else {
-                return COMMAND::FAILURE;
-            }
+        $balance = $this->balanceService->viewBalance($groupId);
 
-           foreach ($members as $member) {
-            if (!array_key_exists($member->getId(), $groupBalance)) {
-                $groupBalance[$member->getId()]=0;
-            }
-                if ($member === $payer) {
-                   $groupBalance[$member->getId()]+=$expenseAmount;
-                }
-
-                if (in_array($member,$groupExpense->getParticipants()->toArray())) {
-                   $groupBalance[$member->getId()]-=$amountPerParticipant;
-                }
-             }
-        }
-
-        foreach($groupBalance as $key => $memberBalance){
-            $currentMembers = array_values(array_filter($members->toArray(), fn($member) => $member->getId() === $key));
-
-            if (empty($currentMembers)) {
-                continue;
-            }
-
-            $currentMember = $currentMembers[0];
-            $memberName = $currentMember->getName();
-
+        foreach ($balance as $memberName => $memberBalance) {
             $output->writeln("{$memberName} {$memberBalance}");
         }
 
         return Command::SUCCESS;
+
     }
 }

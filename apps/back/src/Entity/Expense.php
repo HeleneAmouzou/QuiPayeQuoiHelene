@@ -110,4 +110,31 @@ class Expense {
     {
         return $this->group;
     }
+
+    public function getAmountPerParticipant(): int
+    {
+        $expenseAmount = $this->getAmount();
+        $numberOfParticipants = $this->getParticipants()->count();
+        if ($numberOfParticipants > 0) {
+            return $expenseAmount / $numberOfParticipants;
+        } else {
+            throw new ExpenseWithoutParticipantsException();
+        }
+    }
+
+    public function getBalance(User $user): int
+    {
+        $balance = 0;
+        $expenseAmount = $this->getAmount();
+        $amountPerParticipant = $this->getAmountPerParticipant();
+
+        if ($user === $this->getPayer()) {
+            $balance += $expenseAmount;
+        }
+        if ($this->getParticipants()->contains($user)) {
+            $balance -= $amountPerParticipant;
+        }
+
+        return $balance;
+    }
 }
