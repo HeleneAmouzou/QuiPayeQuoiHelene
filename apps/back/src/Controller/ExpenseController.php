@@ -64,7 +64,6 @@ class ExpenseController extends AbstractController
         } catch (ExpenseWithoutParticipantsException $e) {
             $this->addFlash('error', 'Veuillez cocher au moins 1 participant à cette dépense.');
         } catch (Throwable $e) {
-            throw $e;
             $this->addFlash('error', 'Erreur dans le formulaire, veuillez saisir tous les champs.');
         }
 
