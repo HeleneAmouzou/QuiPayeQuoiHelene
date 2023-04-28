@@ -57,24 +57,24 @@ class ExpenseSpec extends ObjectBehavior
         );
     }
 
-    function it_gets_balance_if_user_is_payer_and_participant(User $payer)
+    function it_adds_expense_amount_and_it_subtracts_amount_per_participant_to_the_balance_if_user_is_payer_and_participant(User $payer)
     {
         $this->setPayer($payer);
         $this->getBalance($payer)->shouldReturn(1500);
     }
 
-    function it_gets_balance_if_user_is_payer(User $user)
+    function it_adds_expense_amount_to_the_balance_if_user_is_payer(User $user)
     {
         $this->setPayer($user);
         $this->getBalance($user)->shouldReturn(3000);
     }
 
-    function it_gets_balance_if_user_is_participant(User $participant)
+    function it_subtracts_amount_per_participant_to_the_balance_if_user_is_participant(User $participant)
     {
         $this->getBalance($participant)->shouldReturn(-1500);
     }
 
-    function it_gets_balance_if_user_is_not_payer_or_participant(User $user)
+    function it_does_not_update_the_balance_if_user_is_not_payer_or_participant(User $user)
     {
         $this->getBalance($user)->shouldReturn(0);
     }
