@@ -31,15 +31,16 @@ class ExpenseSpec extends ObjectBehavior
 
     function it_should_throw_exception_if_participant_empty(User $participant, User $payer, Group $group)
     {
-        $this->shouldThrow(ExpenseWithoutParticipantsException::class)->during(
-            '__construct',
-            [ 'dépense',
+        $this->beConstructedWith(
+            'dépense',
             new DateTimeImmutable(),
             3000,
             new ArrayCollection([]),
             $payer,
-            $group]
+            $group
         );
+
+        $this->shouldThrow(ExpenseWithoutParticipantsException::class)->duringInstantiation();
     }
 
     function it_gets_amount_per_participant()
