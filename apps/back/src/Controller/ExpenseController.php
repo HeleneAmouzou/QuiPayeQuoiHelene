@@ -58,7 +58,8 @@ class ExpenseController extends AbstractController
                     $em->persist($expense);
                     $em->flush();
                     $this->addFlash('success', 'Dépense ajoutée !');
-                    return $this->redirectToRoute('expense_list');
+                    $id = $expense->getGroup()->getId();
+                    return $this->redirectToRoute('expense_list', ['id' => $id]);
             }
         } catch (ExpenseWithoutParticipantsException $e) {
             $this->addFlash('error', 'Veuillez cocher au moins 1 participant à cette dépense.');

@@ -33,7 +33,7 @@
     </div>
     <div>
         <a href="{{ path('expense_add') }}">Ajouter une dépense</a>
-        <a href="#">Afficher le bilan</a>
+        <a href="{{ path('group_balance', {'groupId': group.id}) }}">Afficher la balance</a>
         <a href="#">Retour</a>
     </div>
 {% endblock %}
