@@ -7,20 +7,20 @@
 {% block body %}
     <h1>Groupe : {{ group.name }}</h1>
     <h2 class="mt-4">Balance</h2>
-    <div class="container col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+    <div class="container tbl-container col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
         <div class="row tbl-fixed table-responsive">
             <table class="mt-4 table table-striped">
                 <thead>
                     <tr>
-                        <th>Membre</th>
-                        <th>Balance</th>
+                        <th class="table-th" scope="col">Membre</th>
+                        <th class="table-th" scope="col">Balance</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for memberName, memberBalance in balance %}
                         <tr>
                             <td>{{ memberName }}</td>
-                            <td>{{ (memberBalance|round(0,'common'))|format_currency }}</td>
+                            <td>{{ memberBalance|round(0,'common')|format_currency }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

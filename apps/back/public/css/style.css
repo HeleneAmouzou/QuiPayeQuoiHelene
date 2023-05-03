@@ -22,7 +22,7 @@ h2 {
 }
 
 #welcome-image {
-    max-width: 38rem;
+    max-width: 600px;
 }
 
 table {
@@ -38,7 +38,9 @@ table {
 .tbl-container {
     max-width: none;
     max-height: fit-content;
-    box-sizing: content-box !important;
+    box-sizing: content-box;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .tbl-fixed {
@@ -60,8 +62,12 @@ th {
     font-size: larger;
     position: sticky;
     top: 0px;
-    background-color: #041635 !important;
+    background-color: #041635;
     color:#e6e6e6;
+}
+
+table.mt-4 thead tr th.table-th {
+    background-color: #041635;
 }
 
 .btn {
@@ -70,7 +76,7 @@ th {
 
 .btn-accueil {
     background-color: #1494ff;
-    width: 15rem !important;
+    width: 15rem;
     margin-top: 5;
 }
 
