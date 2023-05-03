@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ parent() }} > Bilan du groupe
+    {{ parent() }} > Balance du groupe
 {% endblock %}
 
 {% block body %}
-    <h1>Groupe : {{ group.name }}</h2>
+    <h1>Groupe : {{ group.name }}</h1>
     <h2 class="mt-4">Balance</h2>
     <div class="container col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
         <div class="row tbl-fixed table-responsive">
@@ -15,18 +15,18 @@
                         <th>Membre</th>
                         <th>Balance</th>
                     </tr>
-                <thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     {% for memberName, memberBalance in balance %}
                         <tr>
                             <td>{{ memberName }}</td>
                             <td>{{ (memberBalance|round(0,'common'))|format_currency }}</td>
                         </tr>
                     {% endfor %}
-                    </tbody>
+                </tbody>
             </table>
-            <div class="col-md-12 text-center">
-            <a href="#" class="btn btn-primary">Retour</a>
+            <div class="text-center">
+                <a href="{{ path('home_index') }}" class="btn btn-primary">Retour</a>
             </div>
         </div>
     </div>

@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Groupe : {{ group.name }}</h2>
+    <h1>Groupe : {{ group.name }}</h1>
     <h2 class="mt-4">Liste des dépenses</h2>
-    <div class="container tbl-container col-10 col-sm-10 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-        <div class="row tbl-fixed table-responsive">
-            <table class="mt-4 table table-striped">
+    <div class="container tbl-container col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 col-xxl-10">
+        <div class="row tbl-fixed table-responsive w-100">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Nom</th>
@@ -22,7 +22,7 @@
                 <tbody>
                     {% for expense in group.expensesOfTheGroup|sort((b,a) => a.date <=> b.date) %}
                         <tr>
-                            <td cope="row">{{ expense.name }}</td>
+                            <td>{{ expense.name }}</td>
                             <td>{{ expense.payer.name }}</td>
                             <td>{{ expense.date|date('d/m/Y') }}</td>
                             <td>{{ expense.amount|format_currency }}</td>
@@ -38,11 +38,12 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <div class="col-md-12 text-center">
-                <a href="{{ path('expense_add') }}" class="btn btn-primary">Ajouter une dépense</a>
-                <a href="#" class="btn btn-primary">Afficher le bilan</a>
-                <a href="#" class="btn btn-primary">Retour</a>
-            </div>
+        </div>
+        <div class="mb-5 text-center">
+            <a href="{{ path('expense_add') }}" class="btn btn-primary">Ajouter une dépense</a>
+            <a href="{{ path('group_balance', {'groupId': group.id}) }}" class="btn btn-primary">Afficher la balance</a>
+            <a href="{{ path('home_index') }}" class="btn btn-primary">Retour</a>
         </div>
     </div>
+
 {% endblock %}

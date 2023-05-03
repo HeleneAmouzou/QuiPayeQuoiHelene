@@ -10,22 +10,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     </head>
 
-    <div>
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-    </div>
-
     <nav class="navbar">
         <div>
             <div class="container">
                 <div class="row">
                     <div class="col-4 col-sm-4 col-md-4 col-lg-6 col-xl-6 col-xxl-6 left">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="{{ path('home_index') }}">
                             <img src="{{ asset('logos/logo-quipaiequoi-simple-transparent.png')}}" class="img-fluid img-responsive" alt="logo QuiPaieQuoi">
                         </a>
                     </div>
@@ -34,6 +24,16 @@
         </div>
     </nav>
 
+    <div>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="message alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
     <body>
         <div class="mt-4">
             {% block body %}
@@ -41,12 +41,12 @@
             {% endblock %}
         </div>
     </body>
-    <div class="col-4 col-sm-4 col-md-4 col-lg-6 col-xl-6 col-xxl-6">
-        <footer class="bottom-bar py-1 fixed-bottom">
+
+    <div class="col-4 col-sm-4 col-md-4 col-lg-6 col-xl-6 col-xxl-6 h-auto">
+        <footer class="bottom-bar fixed-bottom">
             <div class="container text-light text-center">
                 <div class="row">
-                    <p class="display-5 pt-2 mb-3"> Qui Paie Quoi ?</p>
-                    <small class="text-white-50">&copy; Hélène Amouzou - {{ "now" | date("Y") }}</small>
+                    <p class="display-7 pt-2 mb-3">&copy; <span class="italic-text">Qui Paie Quoi ? </span> {{ "now" | date("Y") }} - Hélène Amouzou </p>
                 </div>
             </div>
         </footer>

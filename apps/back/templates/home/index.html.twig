@@ -4,4 +4,27 @@
 
 {% block body %}
     <h1>Bienvenue</h1>
+    <div class="container col-10 col-sm-10 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+        <div class="row mt-4 d-flex justify-content-center">
+            <img src="{{ asset('logos/logo-quipaiequoi-titre.png')}}" id="welcome-image" class="img-fluid img-responsive" alt="logo entier QuiPaieQuoi">
+        </div>
+    </div>
+    <div>
+        <h2 class="mt-4">Que voulez-vous faire ?</h2>
+    </div>
+    <div class="row mt-4">
+        <div class="text-center">
+            <a href="{{ path('expense_add') }}" class="btn btn-primary btn-accueil btn-block">Ajouter une dépense</a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="text-center">
+            <a href="{{ path('expense_list', {'id': 2}) }}" class="btn btn-primary btn-accueil btn-block">Liste des dépenses</a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="text-center">
+            <a href="{{ path('group_balance', {'groupId': 2}) }}" class="btn btn-primary btn-accueil btn-block">Afficher la balance</a>
+        </div>
+    </div>
 {% endblock %}

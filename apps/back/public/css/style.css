@@ -3,62 +3,88 @@
     color: #041635;
 }
 
+h1 {
+    color: #1494ff;
+}
+
 h2 {
     text-align: center;
- }
+}
 
 .bottom-bar {
     text-align: center;
     background-color: #041635;
+    height: 3rem;
 }
 
 .bottom-bar p {
     color: white;
 }
 
+#welcome-image {
+    max-width: 38rem;
+}
+
 table {
     border-collapse: collapse;
     min-width: max-content;
+    width: 100%;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td {
+    background-color: #7ac2ff;
+}
+
+.tbl-container {
+    max-width: none;
+    max-height: fit-content;
+    box-sizing: content-box !important;
+}
+
+.tbl-fixed {
+    overflow-y: auto;
+    overflow-x: auto;
+    height: fit-content;
+    max-height: 70vh;
+    margin-top: 40px;
+    width: 100%;
+}
+
+td, th {
+    padding: 10px;
+    letter-spacing: 1px;
+    text-align: center;
 }
 
 th {
     font-size: larger;
     position: sticky;
     top: 0px;
- }
-
-
-.table-striped > tbody > tr:nth-child(2n+1) > td {
-    background-color: #7ac2ff;
- }
-
- td,
- th {
-     border: 1px solid #041635;
-     padding: 10px;
-     letter-spacing: 1px;
-     text-align: center;
- }
-
-
-.tbl-container {
-    max-width: fit-content;
-    max-height: fit-content;
-}
-
-.tbl-fixed {
-    overflow-y: scroll;
-    overflow-x: scroll;
-    height: fit-content;
-    max-height: 70vh;
-    margin-top: 40px;
-}
-
-th {
     background-color: #041635 !important;
     color:#e6e6e6;
 }
 
 .btn {
     background-color: #041635;
+}
+
+.btn-accueil {
+    background-color: #1494ff;
+    width: 15rem !important;
+    margin-top: 5;
+}
+
+#form-frame {
+    border: 0.25rem solid;
+    border-color: #041635;
+    padding: 1rem;
+}
+
+.message {
+ color: #47abff;
+}
+
+.italic-text {
+    font-style: italic;
+    color: white;
 }
