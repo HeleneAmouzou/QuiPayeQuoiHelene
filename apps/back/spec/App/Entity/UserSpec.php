@@ -25,8 +25,6 @@ class UserSpec extends ObjectBehavior
             new ArrayCollection([$expensesAsParticipant1->getWrappedObject(), $expensesAsParticipant2->getWrappedObject()]),
             new ArrayCollection([$expensesAsPayer1->getWrappedObject(), $expensesAsPayer2->getWrappedObject()]),
             new ArrayCollection([$group1->getWrappedObject(), $group2->getWrappedObject()])
-
-
         );
     }
 
