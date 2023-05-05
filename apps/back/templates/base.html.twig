@@ -3,21 +3,52 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Qui paie quoi ?{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     </head>
+
+    <nav class="navbar">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-6 col-xl-6 col-xxl-6 left">
+                        <a class="navbar-brand" href="{{ path('home_index') }}">
+                            <img src="{{ asset('logos/logo-quipaiequoi-simple-transparent.png')}}" class="img-fluid img-responsive" alt="logo QuiPaieQuoi">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div>
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-                <div class="alert-{{ label }}">
+                <div class="message alert-{{ label }}">
                     {{ message }}
                 </div>
             {% endfor %}
         {% endfor %}
     </div>
-    <header>
-        <h1>Qui Paye Quoi ?</h1>
-    <header>
+
     <body>
-        {% block body %}{% endblock %}
+        <div class="mt-4">
+            {% block body %}
+                <div class="container-fluid"></div>
+            {% endblock %}
+        </div>
     </body>
+
+    <div class="col-4 col-sm-4 col-md-4 col-lg-6 col-xl-6 col-xxl-6 h-auto">
+        <footer class="bottom-bar fixed-bottom">
+            <div class="container text-light text-center">
+                <div class="row">
+                    <p class="display-7 pt-2 mb-3">&copy; <span class="italic-text">Qui Paie Quoi ? </span> {{ "now" | date("Y") }} - Hélène Amouzou </p>
+                </div>
+            </div>
+        </footer>
+    </div>
 </html>

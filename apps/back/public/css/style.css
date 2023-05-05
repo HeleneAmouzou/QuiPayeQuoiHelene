@@ -1,13 +1,109 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    color: #041635;
+}
+
+h1 {
+    color: #1494ff;
+}
+
+h2 {
+    text-align: center;
+}
+
+.bottom-bar {
+    text-align: center;
+    background-color: #041635;
+    height: 3rem;
+}
+
+.bottom-bar p {
+    color: white;
+}
+
+#welcome-image {
+    max-width: 600px;
+}
+
 table {
     border-collapse: collapse;
+    min-width: max-content;
+    width: 100%;
 }
 
-td,
-th {
-    border: 1px solid black;
+.table-striped > tbody > tr:nth-child(2n+1) > td {
+    background-color: #7ac2ff;
+}
+
+.tbl-container {
+    max-width: none;
+    max-height: fit-content;
+    box-sizing: content-box;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.tbl-fixed {
+    overflow-y: auto;
+    overflow-x: auto;
+    height: fit-content;
+    max-height: 70vh;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.tbl-home {
+    overflow-y: auto;
+    overflow-x: auto;
+    height: fit-content;
+    max-height: 70vh;
+    margin-top: 20px;
+    width: 100%;
+}
+
+td, th {
     padding: 10px;
+    letter-spacing: 1px;
+    text-align: center;
 }
 
-td {
-    text-align: center;
+th {
+    font-size: larger;
+    position: sticky;
+    top: 0px;
+    background-color: #041635;
+    color:#e6e6e6;
+}
+
+table.mt-4 thead tr th.table-th {
+    background-color: #041635;
+}
+
+.table-th-home {
+    color: #041635;
+}
+
+.btn {
+    background-color: #041635;
+}
+
+.btn-accueil {
+    background-color: #1494ff;
+    width: 15rem;
+    margin-top: 5;
+}
+
+#form-frame {
+    border: 0.25rem solid;
+    border-color: #041635;
+    padding: 1rem;
+}
+
+.message {
+    color: #47abff;
+}
+
+.italic-text {
+    font-style: italic;
+    color: white;
 }

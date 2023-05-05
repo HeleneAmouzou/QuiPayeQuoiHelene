@@ -5,35 +5,45 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Groupe : {{ group.name }}</h2>
-    <h2>Liste des dépenses</h2>
-    <div>
-        <table>
-            <tr>
-                <th>Nom Payé par</th>
-                <th>Date</th>
-                <th>Montant</th>
-                <th>Participants</th>
-            </tr>
-            {% for expense in group.expensesOfTheGroup|sort((b,a) => a.date <=> b.date) %}
-                <tr>
-                    <td>{{ expense.name }} payé par {{ expense.payer.name }}</td>
-                    <td>{{ expense.date|date('d/m/Y') }}</td>
-                    <td>{{ expense.amount|format_currency }}</td>
-                    <td>
-                    {% for participant in expense.participants %}
-                        {{ participant }}
+    <h1>Groupe : {{ group.name }}</h1>
+    <h2 class="mt-4">Liste des dépenses</h2>
+    <div class="container tbl-container col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 col-xxl-10">
+        <div class="row tbl-fixed table-responsive w-100">
+            <table class="mt-4 table table-striped">
+                <thead>
+                    <tr>
+                        <th class="table-th" scope="col">Nom</th>
+                        <th class="table-th" scope="col">Payé par</th>
+                        <th class="table-th" scope="col">Date</th>
+                        <th class="table-th" scope="col">Montant</th>
+                        <th class="table-th" scope="col">Participants</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in group.expensesOfTheGroup|sort((b,a) => a.date <=> b.date) %}
+                        <tr>
+                            <td>{{ expense.name }}</td>
+                            <td>{{ expense.payer.name }}</td>
+                            <td>{{ expense.date|date('d/m/Y') }}</td>
+                            <td>{{ expense.amount|format_currency }}</td>
+                            <td class="d-md-none">{{ expense.participants|length }}</td>
+                            <td class="d-none d-md-block">
+                            {% for participant in expense.participants %}
+                                {{ participant }}
+                            {% endfor %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <p>Ce groupe n'a pas encore de dépense.</p>
                     {% endfor %}
-                    </td>
-                </tr>
-            {% else %}
-                <p>Ce groupe n'a pas encore de dépense.</p>
-            {% endfor %}
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="mb-5 text-center">
+            <a href="{{ path('expense_add') }}" class="btn btn-primary">Ajouter une dépense</a>
+            <a href="{{ path('group_balance', {'id': group.id}) }}" class="btn btn-primary">Afficher la balance</a>
+            <a href="{{ path('home_index') }}" class="btn btn-primary">Retour</a>
+        </div>
     </div>
-    <div>
-        <a href="{{ path('expense_add') }}">Ajouter une dépense</a>
-        <a href="{{ path('group_balance', {'groupId': group.id}) }}">Afficher la balance</a>
-        <a href="#">Retour</a>
-    </div>
+
 {% endblock %}

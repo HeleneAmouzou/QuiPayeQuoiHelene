@@ -4,4 +4,40 @@
 
 {% block body %}
     <h1>Bienvenue</h1>
+    <div class="container col-10 col-sm-10 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+        <div class="row mt-8 d-flex justify-content-center">
+            <img src="{{ asset('logos/logo-quipaiequoi-titre.png')}}" id="welcome-image" class="img-fluid img-responsive" alt="logo entier QuiPaieQuoi">
+        </div>
+    </div>
+    <div>
+        <h2 class="mt-8">Que voulez-vous faire ?</h2>
+    </div>
+    <div class="row mt-4">
+        <div class="text-center">
+            <a href="{{ path('expense_add') }}" class="btn btn-primary btn-accueil btn-block">Ajouter une dépense</a>
+        </div>
+    </div>
+    <div class="container tbl-container col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 col-xxl-10">
+        <div class="row tbl-home table-responsive w-100">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-th-home" scope="col">Nom du groupe</th>
+                        <th class="table-th-home" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for group in groups %}
+                        <tr>
+                            <td>{{ group.name }}</td>
+                            <td>
+                                <a href="{{ path('expense_list', {'id': group.id}) }}" class="btn btn-primary btn-accueil btn-block">Liste des dépenses</a>
+                                <a href="{{ path('group_balance', {'id': group.id}) }}" class="btn btn-primary btn-accueil btn-block">Afficher la balance</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

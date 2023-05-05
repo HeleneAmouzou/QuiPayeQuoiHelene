@@ -45,9 +45,6 @@ class ExpenseType extends AbstractType
             ->add('group', EntityType::class, [
                 'class' => Group::class,
                 'label' => 'Groupe : '
-            ])
-            ->add('addExpense', SubmitType::class, [
-                'label' => 'Ajouter'
             ]);
     }
 }

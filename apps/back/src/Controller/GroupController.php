@@ -18,15 +18,15 @@ class GroupController extends AbstractController
     ){
     }
 
-    #[Route('/{groupId}/balance', name: '_balance', methods: ['GET'])]
+    #[Route('/{id}/balance', name: '_balance', methods: ['GET'])]
     public function viewBalance(
-        int $groupId,
+        int $id,
     ): Response
     {
         $groupRepository = $this->em->getRepository(Group::class);
-        $group = $groupRepository->find(['id' => $groupId]);
+        $group = $groupRepository->find(['id' => $id]);
 
-        $balance = $this->balanceService->viewBalance($groupId);
+        $balance = $this->balanceService->viewBalance($id);
 
         return $this->render('group/displayBalance.html.twig', [
             'group' => $group,
