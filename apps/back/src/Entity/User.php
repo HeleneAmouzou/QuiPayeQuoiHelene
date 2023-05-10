@@ -11,10 +11,11 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Entity]
 #[Table(name: 'user')]
-class User {
+class User implements UserInterface {
     #[Id]
     #[Column(type: Types::INTEGER)]
     #[GeneratedValue(strategy:'IDENTITY')]
@@ -28,7 +29,13 @@ class User {
         private string $surname,
 
         #[Column(length: 255)]
-        private string $mail,
+        private string $email,
+
+        #[Column(type: Types::JSON)]
+        private Collection $roles,
+
+        #[Column(length: 15)]
+        private ?string $password = null,
 
         #[ManyToMany(targetEntity: Expense::class, mappedBy:'participants')]
         private Collection $expensesAsParticipant,
@@ -66,14 +73,42 @@ class User {
         return $this->surname;
     }
 
-    public function setMail(string $mail): void
+    public function setEmail(string $email): void
     {
-        $this->mail = $mail;
+        $this->email = $email;
     }
 
-    public function getMail(): string
+    public function getEmail(): string
     {
-        return $this->mail;
+        return $this->email;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
+    }
+
+    public function getRoles(): array
+    {
+        // dump($this);
+        // $roles = $this->roles;
+        // $roles[] = 'ROLE_USER';
+        return ['ROLE_USER'];
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function eraseCredentials()
+    {
+        $this->password = null;
     }
 
     public function setExpensesAsParticipant(Collection $expensesAsParticipant): void

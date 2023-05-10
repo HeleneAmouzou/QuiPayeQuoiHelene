@@ -11,6 +11,11 @@ h2 {
     text-align: center;
 }
 
+.nav-authentication a {
+    font-family: 'Roboto', sans-serif;
+    color:  #1494ff;
+}
+
 .bottom-bar {
     text-align: center;
     background-color: #041635;

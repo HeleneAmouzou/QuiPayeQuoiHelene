@@ -16,9 +16,9 @@ class AppFixtures extends Fixture
     {
         $bad = new Group('bad', new ArrayCollection([]), new ArrayCollection([]));
 
-        $andre = new User('Andre', 'Toto', 'andre@gmail.com', new ArrayCollection([]), new ArrayCollection([]), new ArrayCollection([$bad]));
-        $caro = new User('Caroline', 'Titi', 'caro@gmail.com', new ArrayCollection([]), new ArrayCollection([]), new ArrayCollection([$bad]));
-        $benoit = new User('Benoit', 'Tutu', 'benoit@gmail.com', new ArrayCollection([]), new ArrayCollection([]), new ArrayCollection([$bad]));
+        $andre = new User('Andre', 'Toto', 'andre@gmail.com', new ArrayCollection([]), '111111', new ArrayCollection([]), new ArrayCollection([]), new ArrayCollection([$bad]));
+        $caro = new User('Caroline', 'Titi', 'caro@gmail.com', new ArrayCollection([]), '222222', new ArrayCollection([]), new ArrayCollection([]), new ArrayCollection([$bad]));
+        $benoit = new User('Benoit', 'Tutu', 'benoit@gmail.com', new ArrayCollection([]), '333333', new ArrayCollection([]), new ArrayCollection([]), new ArrayCollection([$bad]));
         $manager->persist($andre);
         $manager->persist($caro);
         $manager->persist($benoit);
