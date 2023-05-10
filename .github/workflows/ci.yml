@@ -1,7 +1,7 @@
 ---
 on: [push]
 env:
-  COMPOSE_FILE: docker-compose.yml
+  COMPOSE_FILE: docker-compose.ci.yml
 jobs:
   Analyse:
     runs-on:
