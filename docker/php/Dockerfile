@@ -25,10 +25,8 @@ RUN mkdir /.composer && chown 1000 /.composer
 
 COPY apps/back /usr/src/app
 
-RUN mkdir -p /usr/src/app/var/cache /usr/src/app/var/log
-RUN chmod -R a+w /usr/src/app/var/cache /usr/src/app/var/log
-
-COPY . /usr/src/app
+RUN mkdir -p /usr/src/app/var/cache /usr/src/app/var/log /usr/src/app/vendor
+RUN chmod -R a+w /usr/src/app/var/cache /usr/src/app/var/log /usr/src/app/vendor
 
 RUN chown -R 1000:1000 /usr/src/app
 USER 1000:1000
@@ -38,10 +36,19 @@ USER 1000:1000
 FROM base-php as php
 
 RUN composer install && composer clear-cache
-RUN composer dump-autoload --optimize --classmap-authoritative --no-dev
+RUN composer dump-autoload --optimize --classmap-authoritative
 
 RUN PATH=$PATH:/usr/src/apps/vendor/bin:bin
 
 ##################################
 
 FROM base-php as composer-install
+
+##################################
+
+FROM base-php as ci
+
+RUN composer install && composer clear-cache
+RUN composer dump-autoload --optimize --classmap-authoritative
+
+RUN PATH=$PATH:/usr/src/app/vendor/bin:bin

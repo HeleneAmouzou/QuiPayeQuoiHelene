@@ -1,0 +1,16 @@
+---
+on: [push]
+env:
+  COMPOSE_FILE: docker-compose.ci.yml
+jobs:
+  Analyse:
+    runs-on:
+      - self-hosted
+      - 2GB
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: cp --no-clobber apps/back/.env.dist apps/back/.env
+      - run: docker-compose -f docker-compose.ci.yml build php
+      - name: UnitTests
+        run: docker-compose -f docker-compose.ci.yml run --rm php vendor/bin/phpspec run
