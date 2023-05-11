@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
@@ -33,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface {
         private string $email,
 
         #[Column(type: Types::JSON)]
-        private Collection $roles,
+        private $roles,
 
         #[Column(length: 255)]
         private ?string $password,
@@ -89,14 +90,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface {
         return (string) $this->email;
     }
 
-    public function setRoles(array $roles): void
+    public function setRoles($roles): void
     {
-        $this->roles = $roles;
+        if ($roles instanceof Collection) {
+            $this->roles = $roles;
+        }else{
+            $this->roles = new ArrayCollection($roles);
+        }
+
     }
 
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        $roles = $this->roles instanceof Collection ? $this->roles->toArray():$this->roles;
         $roles[] = 'ROLE_USER';
         return array_unique($roles) ;
     }
