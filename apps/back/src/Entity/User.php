@@ -11,11 +11,12 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Entity]
 #[Table(name: 'user')]
-class User implements UserInterface {
+class User implements UserInterface, PasswordAuthenticatedUserInterface {
     #[Id]
     #[Column(type: Types::INTEGER)]
     #[GeneratedValue(strategy:'IDENTITY')]
@@ -34,8 +35,8 @@ class User implements UserInterface {
         #[Column(type: Types::JSON)]
         private Collection $roles,
 
-        #[Column(length: 15)]
-        private ?string $password = null,
+        #[Column(length: 255)]
+        private ?string $password,
 
         #[ManyToMany(targetEntity: Expense::class, mappedBy:'participants')]
         private Collection $expensesAsParticipant,
@@ -95,13 +96,17 @@ class User implements UserInterface {
 
     public function getRoles(): array
     {
-        // dump($this);
-        // $roles = $this->roles;
-        // $roles[] = 'ROLE_USER';
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles) ;
     }
 
-    public function getPassword(): string
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function getPassword(): ?string
     {
         return $this->password;
     }
