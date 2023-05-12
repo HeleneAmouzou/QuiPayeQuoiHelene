@@ -7,7 +7,7 @@ help: ## Display this current help
 .PHONY=install-dev copy-env install-symfony start
 
 copy-env: ## Copy .env.dist to .env
-	cp -n .env.dist .env
+	cp -n ./apps/back/.env.dist ./apps/back/.env
 
 install-dev: ## Install project
 	docker compose build php
