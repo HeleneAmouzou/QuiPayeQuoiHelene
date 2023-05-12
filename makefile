@@ -10,10 +10,10 @@ copy-env: ## Copy .env.dist to .env
 	cp -n .env.dist .env
 
 install-dev: ## Install project
-	cp -n .env.dist .env
-	docker compose build
-	docker compose run -T --rm --no-deps php composer install
-	make start
+	docker compose build --no-cache php
+	docker-compose exec php composer install
+	docker-compose exec php bin/console doctrine:migrations:migrate
+	docker-compose exec php bin/console doctrine:fixtures:load --append
 
 start: ## Start project
 	docker compose up -d
