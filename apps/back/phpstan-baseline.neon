@@ -1,0 +1,231 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$groupId of method App\\\\Service\\\\BalanceService\\:\\:viewBalance\\(\\) expects int, mixed given\\.$#"
+			count: 1
+			path: src/Command/ViewBalanceCommand.php
+
+		-
+			message: "#^Cannot access offset 'amount' on mixed\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Cannot access offset 'date' on mixed\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Cannot access offset 'group' on mixed\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Cannot access offset 'name' on mixed\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Cannot access offset 'participants' on mixed\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Cannot access offset 'payer' on mixed\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of class App\\\\Entity\\\\Expense constructor expects string, mixed given\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Parameter \\#2 \\$date of class App\\\\Entity\\\\Expense constructor expects DateTimeImmutable, mixed given\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Parameter \\#3 \\$amount of class App\\\\Entity\\\\Expense constructor expects int, mixed given\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Parameter \\#4 \\$participants of class App\\\\Entity\\\\Expense constructor expects Doctrine\\\\Common\\\\Collections\\\\Collection, mixed given\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Parameter \\#5 \\$payer of class App\\\\Entity\\\\Expense constructor expects App\\\\Entity\\\\User, mixed given\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Parameter \\#6 \\$group of class App\\\\Entity\\\\Expense constructor expects App\\\\Entity\\\\Group, mixed given\\.$#"
+			count: 1
+			path: src/Controller/ExpenseController.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Expense\\:\\:__construct\\(\\) has parameter \\$participants with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/Expense.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Expense\\:\\:getParticipants\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/Expense.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Expense\\:\\:setParticipants\\(\\) has parameter \\$participants with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/Expense.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Expense\\:\\:\\$id is unused\\.$#"
+			count: 1
+			path: src/Entity/Expense.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Group\\:\\:__construct\\(\\) has parameter \\$expensesOfTheGroup with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/Group.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Group\\:\\:__construct\\(\\) has parameter \\$members with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/Group.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Group\\:\\:getExpensesOfTheGroup\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/Group.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Group\\:\\:getMembers\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/Group.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Group\\:\\:setExpensesOfTheGroup\\(\\) has parameter \\$expensesOfTheGroup with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/Group.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\Group\\:\\:setMembers\\(\\) has parameter \\$members with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Entity/Group.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Group\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/Group.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\Group\\:\\:\\$members \\(Doctrine\\\\Common\\\\Collections\\\\Collection\\) does not accept array\\.$#"
+			count: 1
+			path: src/Entity/Group.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:__construct\\(\\) has parameter \\$expensesAsParticipant with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:__construct\\(\\) has parameter \\$expensesAsPayer with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:__construct\\(\\) has parameter \\$groups with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:getExpensesAsParticipant\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:getExpensesAsPayer\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:getGroups\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:setExpensesAsParticipant\\(\\) has parameter \\$expensesAsParticipant with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:setExpensesAsPayer\\(\\) has parameter \\$expensesAsPayer with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Entity\\\\User\\:\\:setGroups\\(\\) has parameter \\$groups with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Property App\\\\Entity\\\\User\\:\\:\\$id is never written, only read\\.$#"
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: "#^Method App\\\\Model\\\\Expense\\:\\:__construct\\(\\) has parameter \\$participants with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Expense.php
+
+		-
+			message: "#^Method App\\\\Model\\\\Expense\\:\\:getParticipants\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Expense.php
+
+		-
+			message: "#^Method App\\\\Model\\\\Expense\\:\\:setParticipants\\(\\) has parameter \\$participants with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Expense.php
+
+		-
+			message: "#^Property App\\\\Model\\\\User\\:\\:\\$expenses is never read, only written\\.$#"
+			count: 1
+			path: src/Model/User.php
+
+		-
+			message: "#^Property App\\\\Model\\\\User\\:\\:\\$expenses type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/User.php
+
+		-
+			message: "#^Cannot call method getBalance\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Service/BalanceService.php
+
+		-
+			message: "#^Cannot call method getId\\(\\) on mixed\\.$#"
+			count: 4
+			path: src/Service/BalanceService.php
+
+		-
+			message: "#^Cannot call method getName\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Service/BalanceService.php
+
+		-
+			message: "#^Method App\\\\Service\\\\BalanceService\\:\\:viewBalance\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Service/BalanceService.php
+
+		-
+			message: "#^Variable \\$balances might not be defined\\.$#"
+			count: 1
+			path: src/Service/BalanceService.php
+
+		-
+			message: "#^Method App\\\\Twig\\\\AppExtension\\:\\:formatCurrency\\(\\) has parameter \\$amount with no type specified\\.$#"
+			count: 1
+			path: src/Twig/AppExtension.php
