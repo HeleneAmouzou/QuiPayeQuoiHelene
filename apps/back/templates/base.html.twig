@@ -11,17 +11,16 @@
     </head>
 
     <nav class="navbar">
-        <div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-4 col-sm-4 col-md-4 col-lg-6 col-xl-6 col-xxl-6 left">
-                        <a class="navbar-brand" href="{{ path('home_index') }}">
-                            <img src="{{ asset('logos/logo-quipaiequoi-simple-transparent.png')}}" class="img-fluid img-responsive" alt="logo QuiPaieQuoi">
-                        </a>
-                    </div>
+            <div class="row">
+                <div class="col-4 col-sm-4 col-md-4 col-lg-6 col-xl-6 col-xxl-6">
+                    <a class="navbar-brand" href="{{ path('home_index') }}">
+                        <img src="{{ asset('logos/logo-quipaiequoi-simple-transparent.png')}}" class="img-fluid img-responsive" alt="logo QuiPaieQuoi">
+                    </a>
                 </div>
             </div>
-        </div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-6 col-xl-6 col-xxl-6 text-end">
+                <a class="nav-link navbar-brand nav-authentication right" href="{{ path('app_login') }}">Se connecter</a>
+            </div>
     </nav>
 
     <div>

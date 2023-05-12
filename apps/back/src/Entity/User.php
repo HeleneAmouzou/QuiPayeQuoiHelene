@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
@@ -11,10 +12,12 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Entity]
 #[Table(name: 'user')]
-class User {
+class User implements UserInterface, PasswordAuthenticatedUserInterface {
     #[Id]
     #[Column(type: Types::INTEGER)]
     #[GeneratedValue(strategy:'IDENTITY')]
@@ -28,7 +31,13 @@ class User {
         private string $surname,
 
         #[Column(length: 255)]
-        private string $mail,
+        private string $email,
+
+        #[Column(type: Types::JSON)]
+        private $roles,
+
+        #[Column(length: 255)]
+        private ?string $password,
 
         #[ManyToMany(targetEntity: Expense::class, mappedBy:'participants')]
         private Collection $expensesAsParticipant,
@@ -66,14 +75,51 @@ class User {
         return $this->surname;
     }
 
-    public function setMail(string $mail): void
+    public function setEmail(string $email): void
     {
-        $this->mail = $mail;
+        $this->email = $email;
     }
 
-    public function getMail(): string
+    public function getEmail(): string
     {
-        return $this->mail;
+        return $this->email;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function setRoles($roles): void
+    {
+        if ($roles instanceof Collection) {
+            $this->roles = $roles;
+        }else{
+            $this->roles = new ArrayCollection($roles);
+        }
+
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles instanceof Collection ? $this->roles->toArray():$this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles) ;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function eraseCredentials()
+    {
+        $this->password = null;
     }
 
     public function setExpensesAsParticipant(Collection $expensesAsParticipant): void
