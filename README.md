@@ -17,11 +17,8 @@ Qui Paie Quoi ? is an application helping groups to organize their expenses.
 
 To run this project :
 1. Clone the project : https://github.com/KnpLabs/QuiPayeQuoiHelene.git ;
-2. Run `docker compose build --no-cache php` ;
-4. Run `docker-compose exec php composer install`;
-5. Run `docker-compose exec php bin/console doctrine:migrations:migrate`;
-6. Run `docker-compose exec php bin/console doctrine:fixtures:load --append`;
-
+2. Run `make install-dev`;
+Application accessible on localhost.
 
 ## Technologies
 
