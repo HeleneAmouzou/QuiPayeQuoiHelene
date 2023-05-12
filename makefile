@@ -7,13 +7,16 @@ help: ## Display this current help
 .PHONY=install-dev copy-env install-symfony start
 
 copy-env: ## Copy .env.dist to .env
-	cp -n .env.dist .env
+	cp -n ./apps/back/.env.dist ./apps/back/.env
 
 install-dev: ## Install project
-	cp -n .env.dist .env
-	docker compose build
-	docker compose run -T --rm --no-deps php composer install
-	make start
+	docker compose build php
+	docker compose up -d
+	docker compose exec php composer install
+	docker compose exec php bin/console doctrine:database:drop --if-exists --force
+	docker compose exec php bin/console doctrine:database:create --if-not-exists
+	docker compose exec php bin/console doctrine:migrations:migrate --no-interaction
+	docker compose exec php bin/console doctrine:fixtures:load --no-interaction
 
 start: ## Start project
 	docker compose up -d

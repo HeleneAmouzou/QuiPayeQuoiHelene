@@ -1,6 +1,12 @@
-# Symfony template project
+# Qui Paie Quoi ?
 
-This is template project for symfony with Docker and docker-compose.
+Qui Paie Quoi ? is an application helping groups to organize their expenses.
+
+## Table of contents
+
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Technologies](#technologies)
 
 ## Requirements
 
@@ -9,6 +15,19 @@ This is template project for symfony with Docker and docker-compose.
 
 ## Installation
 
-1. Clone the project ;
-2. Run `make copy-env` ;
-3. Run `docker compose run base-php composer create-project symfony/skeleton:"6.2.*" back` (change `6.2.*` with any symfony version you want) ;
+To run this project :
+1. Clone the project : https://github.com/KnpLabs/QuiPayeQuoiHelene.git ;
+2. Run `make install-dev`;
+Application accessible on localhost.
+
+## Technologies
+
+This project is created with:
+- Nginx 1.21.3-alpine
+- Docker 23.0.2
+- PHP 8.1
+- Symfony 6.2
+- Twig 3.0
+- MySQL 8.0.32
+- Doctrine 2.7.1
+- Bootstrap 5.3.0-alpha3
