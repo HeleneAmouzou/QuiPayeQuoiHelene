@@ -23,3 +23,6 @@ start: ## Start project
 
 install-symfony: ## Install symfony
     docker compose run base-php composer create-project symfony/skeleton:"6.2.*" back
+
+phpstan:
+	docker compose run --rm php vendor/bin/phpstan analyse

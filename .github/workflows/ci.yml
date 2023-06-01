@@ -14,3 +14,5 @@ jobs:
       - run: docker-compose -f docker-compose.ci.yml build php
       - name: UnitTests
         run: docker-compose -f docker-compose.ci.yml run --rm php vendor/bin/phpspec run
+      - name: phpstan
+        run: docker-compose -f docker-compose.ci.yml run --rm php vendor/bin/phpstan analyse
